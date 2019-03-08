@@ -23,12 +23,27 @@ public:
 	// ------------------------------------Media-----------------------------------------------
 	// Description: constructor, initializes values to default values
 	// ---------------------------------------------------------------------------------------------------
-	Media();
+	Media(std::string title, char distributionType, std::string releaseDate);
 
 	// ------------------------------------~Media-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated Media object
 	// ---------------------------------------------------------------------------------------------------
 	~Media();
+
+	// ------------------------------------setTitle-----------------------------------------------
+	// Description: setter for title
+	// ---------------------------------------------------------------------------------------------------
+	virtual void setTitle(std::string title);
+
+	// ------------------------------------setDistributionType-----------------------------------------------
+	// Description: setter for distributionType
+	// ---------------------------------------------------------------------------------------------------
+	virtual void setDistributionType(char type);
+
+	// ------------------------------------setReleaseDate-----------------------------------------------
+	// Description: setter for release date
+	// ---------------------------------------------------------------------------------------------------
+	virtual void setReleaseDate(std::string releaseDate);
 
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison
@@ -40,35 +55,20 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const Media& other) const = 0;
 
-	// ------------------------------------setReleaseDate-----------------------------------------------
-	// Description: setter for release date
-	// ---------------------------------------------------------------------------------------------------
-	virtual void setReleaseDate(std::string releaseDate) = 0;
-
-	// ------------------------------------setTitle-----------------------------------------------
-	// Description: setter for title
-	// ---------------------------------------------------------------------------------------------------
-	virtual void setTitle(std::string title) = 0;
-
-	// ------------------------------------setDistributionType-----------------------------------------------
-	// Description: setter for distributionType
-	// ---------------------------------------------------------------------------------------------------
-	virtual void setDistributionType(char type) = 0;
-
 	// ------------------------------------getReleaseDate-----------------------------------------------
 	// Description: getter for releaseDate
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getReleaseDate() = 0;
+	virtual std::string getReleaseDate();
 
 	// ------------------------------------getTitle-----------------------------------------------
 	// Description: getter for title
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getTitle() = 0;
+	virtual std::string getTitle();
 
 	// ------------------------------------getDistributionType-----------------------------------------------
 	// Description: getter for distributionType
 	// ---------------------------------------------------------------------------------------------------
-	virtual char getDistributionType() = 0;
+	virtual char getDistributionType();
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index
