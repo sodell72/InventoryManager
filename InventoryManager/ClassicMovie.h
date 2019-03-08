@@ -23,7 +23,7 @@ public:
 	// ------------------------------------ClassicMovie-----------------------------------------------
 	// Description: constructor, initializes values based on movie info
 	// ---------------------------------------------------------------------------------------------------
-	ClassicMovie(std::string movieInfo);
+	ClassicMovie(std::string classicMovieData);
 
 	// ------------------------------------~ClassicMovie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated ClassicMovie object
@@ -45,41 +45,41 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	void setReleaseYear(std::string releaseYear);
 
-	// ------------------------------------getMajorActorName-----------------------------------------------
-	// Description: getter for majorActorName
-	// ---------------------------------------------------------------------------------------------------
-	std::string getMajorActorName();
-
-	// ------------------------------------getReleaseMonth-----------------------------------------------
-	// Description: getter for releaseMonth
-	// ---------------------------------------------------------------------------------------------------
-	std::string getReleaseMonth();
-
-	// ------------------------------------getReleaseYear-----------------------------------------------
-	// Description: getter for releaseYear
-	// ---------------------------------------------------------------------------------------------------
-	std::string getReleaseYear();
-
-	// ------------------------------------getReleaseDate-----------------------------------------------
-	// Description: getter for releaseDate, overrides parent function, combines release month and year to
-	// provide a release date.
-	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getReleaseDate() override;
-
 	// ------------------------------------setReleaseDate-----------------------------------------------
 	// Description: setter for release date, also sets release month and release year
 	// ---------------------------------------------------------------------------------------------------
 	void setReleaseDate(std::string releaseDate) override;
 
+	// ------------------------------------getMajorActorName-----------------------------------------------
+	// Description: getter for majorActorName
+	// ---------------------------------------------------------------------------------------------------
+	std::string getMajorActorName() const;
+
+	// ------------------------------------getReleaseMonth-----------------------------------------------
+	// Description: getter for releaseMonth
+	// ---------------------------------------------------------------------------------------------------
+	std::string getReleaseMonth() const;
+
+	// ------------------------------------getReleaseYear-----------------------------------------------
+	// Description: getter for releaseYear
+	// ---------------------------------------------------------------------------------------------------
+	std::string getReleaseYear() const;
+
+	// ------------------------------------getReleaseDate-----------------------------------------------
+	// Description: getter for releaseDate, overrides parent function, combines release month and year to
+	// provide a release date.
+	// ---------------------------------------------------------------------------------------------------
+	virtual std::string getReleaseDate() const override;
+
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator==(const Media & other) const override;
+	virtual bool operator==(const ClassicMovie& other) const;
 
 	// ------------------------------------<-----------------------------------------------
 	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator<(const Media& other) const override;
+	virtual bool operator<(const ClassicMovie& other) const;
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index

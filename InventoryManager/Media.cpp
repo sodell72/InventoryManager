@@ -1,11 +1,8 @@
 #include "Media.h"
 
 
-Media::Media(std::string title, char distributionType, std::string releaseDate)
+Media::Media(std::string mediaData)
 {
-	setTitle(title);
-	setDistributionType(distributionType);
-	setReleaseDate(releaseDate);
 }
 
 Media::~Media()
@@ -27,17 +24,17 @@ void Media::setReleaseDate(std::string releaseDate)
 	this->releaseDate = releaseDate;
 }
 
-std::string Media::getReleaseDate()
+std::string Media::getReleaseDate() const
 {
 	return this->releaseDate;
 }
 
-std::string Media::getTitle()
+std::string Media::getTitle() const
 {
 	return this->title;
 }
 
-char Media::getDistributionType()
+char Media::getDistributionType() const
 {
 	return this->distributionType;
 }

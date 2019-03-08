@@ -19,7 +19,7 @@ public:
 	// ------------------------------------DramaMovie-----------------------------------------------
 	// Description: constructor, initializes values based on movie info
 	// ---------------------------------------------------------------------------------------------------
-	DramaMovie(std::string movieInfo);
+	DramaMovie(std::string dramaMovieData);
 
 	// ------------------------------------~DramaMovie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated DramaMovie object
@@ -29,12 +29,12 @@ public:
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator==(const Media & other) const;
+	virtual bool operator==(const DramaMovie & other) const;
 
 	// ------------------------------------<-----------------------------------------------
 	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator<(const Media& other) const;
+	virtual bool operator<(const DramaMovie& other) const;
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index

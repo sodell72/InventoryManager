@@ -14,14 +14,14 @@
 class Movie : public Media
 {
 
-private:
+protected:
 	std::string director; // stores the director of the Movie's name
 
 public:
 	// ------------------------------------Movie-----------------------------------------------
 	// Description: constructor, initializes values to default values
 	// ---------------------------------------------------------------------------------------------------
-	Movie(std::string title, char distributionType, std::string releaseDate, std::string director);
+	Movie(std::string movieData);
 
 	// ------------------------------------~Movie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated Movie object
@@ -36,6 +36,6 @@ public:
 	// ------------------------------------getDirector-----------------------------------------------
 	// Description: getter for director
 	// ---------------------------------------------------------------------------------------------------
-	std::string getDirector();
+	std::string getDirector() const;
 
 };

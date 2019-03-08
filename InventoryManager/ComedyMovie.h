@@ -21,7 +21,7 @@ public:
 	// ------------------------------------CommedyMovie-----------------------------------------------
 	// Description: constructor, initializes values based on movie info
 	// ---------------------------------------------------------------------------------------------------
-	ComedyMovie(std::string movieInfo);
+	ComedyMovie(std::string comedyMovieData);
 
 	// ------------------------------------~CommedyMovie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated ComedyMovie object
@@ -31,12 +31,12 @@ public:
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator==(const Media & other) const;
+	virtual bool operator==(const ComedyMovie & other) const;
 
 	// ------------------------------------<-----------------------------------------------
 	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator<(const Media& other) const;
+	virtual bool operator<(const ComedyMovie& other) const;
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index

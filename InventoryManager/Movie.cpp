@@ -1,8 +1,7 @@
 #include "Movie.h"
 
-Movie::Movie(std::string title, char distributionType, std::string releaseDate, std::string director) : Media(title, distributionType, releaseDate)
+Movie::Movie(std::string movieData) : Media(movieData)
 {
-	setDirector(director);
 }
 
 Movie::~Movie()
@@ -14,7 +13,7 @@ void Movie::setDirector(std::string director)
 	this->director = director;
 }
 
-std::string Movie::getDirector()
+std::string Movie::getDirector() const
 {
 	return this->director;
 }
