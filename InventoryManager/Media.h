@@ -14,7 +14,7 @@
 class Media
 {
 
-protected:
+private:
 	std::string releaseDate;
 	std::string title;
 	char distributionType; // DVD, CD, VHS, etc...
@@ -23,45 +23,55 @@ public:
 	// ------------------------------------Media-----------------------------------------------
 	// Description: constructor, initializes values to default values
 	// ---------------------------------------------------------------------------------------------------
-	Media(std::string mediaData);
+	Media();
 
 	// ------------------------------------~Media-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated Media object
 	// ---------------------------------------------------------------------------------------------------
 	~Media();
 
-	// ------------------------------------setTitle-----------------------------------------------
-	// Description: setter for title
+	// ------------------------------------==-----------------------------------------------
+	// Description: performs equality comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual void setTitle(std::string title);
+	virtual bool operator==(const Media & other) const;
 
-	// ------------------------------------setDistributionType-----------------------------------------------
-	// Description: setter for distributionType
+	// ------------------------------------<-----------------------------------------------
+	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
-	virtual void setDistributionType(char type);
+	virtual bool operator<(const Media& other) const;
 
 	// ------------------------------------setReleaseDate-----------------------------------------------
 	// Description: setter for release date
 	// ---------------------------------------------------------------------------------------------------
 	virtual void setReleaseDate(std::string releaseDate);
 
+	// ------------------------------------setTitle-----------------------------------------------
+	// Description: setter for title
+	// ---------------------------------------------------------------------------------------------------
+	void setTitle(std::string title);
+
+	// ------------------------------------setDistributionType-----------------------------------------------
+	// Description: setter for distributionType
+	// ---------------------------------------------------------------------------------------------------
+	void setDistributionType(char type);
+
 	// ------------------------------------getReleaseDate-----------------------------------------------
 	// Description: getter for releaseDate
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getReleaseDate() const;
+	virtual std::string getReleaseDate() = 0;
 
 	// ------------------------------------getTitle-----------------------------------------------
 	// Description: getter for title
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getTitle() const;
+	virtual std::string getTitle();
 
 	// ------------------------------------getDistributionType-----------------------------------------------
 	// Description: getter for distributionType
 	// ---------------------------------------------------------------------------------------------------
-	virtual char getDistributionType() const;
+	virtual char getDistributionType();
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index
 	// ---------------------------------------------------------------------------------------------------
-	virtual int hash(int ID) = 0;
+	virtual int hash(int ID);
 };

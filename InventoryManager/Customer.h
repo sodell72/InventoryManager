@@ -67,6 +67,10 @@ public:
 	// Description: getter for transaction head
 	//----------------------------------------------------------------------------------------------
 	transaction* gettransactionhead();
+	//------------------------------------AddTransactiontoaCustomer----------------------------------
+	// Description: add transaction to the customer
+	//-----------------------------------------------------------------------------------------------
+	void addtransaction(string transactiontype, Movie* m);
 
 };
 

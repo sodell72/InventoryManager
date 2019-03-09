@@ -11,17 +11,16 @@
 #pragma once
 #include "Media.h"
 
-class Movie : public Media
-{
+class Movie : public Media {
 
-protected:
+private:
 	std::string director; // stores the director of the Movie's name
 
 public:
 	// ------------------------------------Movie-----------------------------------------------
 	// Description: constructor, initializes values to default values
 	// ---------------------------------------------------------------------------------------------------
-	Movie(std::string movieData);
+	Movie();
 
 	// ------------------------------------~Movie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated Movie object
@@ -33,9 +32,28 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	void setDirector(std::string director);
 
+	// ------------------------------------getReleaseDate-----------------------------------------------
+	// Description: getter for ReleaseDate
+	// ---------------------------------------------------------------------------------------------------
+	std::string getReleaseDate();
+
 	// ------------------------------------getDirector-----------------------------------------------
 	// Description: getter for director
 	// ---------------------------------------------------------------------------------------------------
-	std::string getDirector() const;
+	std::string getDirector();
 
+	// ------------------------------------==-----------------------------------------------
+	// Description: performs equality comparison
+	// ---------------------------------------------------------------------------------------------------
+	virtual bool operator==(const Media & other) const;
+
+	// ------------------------------------<-----------------------------------------------
+	// Description: performs less than comparison
+	// ---------------------------------------------------------------------------------------------------
+	virtual bool operator<(const Media& other) const;
+
+	// ------------------------------------hash-----------------------------------------------
+	// Description: hashing function, takes in object ID and outputs index
+	// ---------------------------------------------------------------------------------------------------
+	virtual int hash(int ID);
 };
