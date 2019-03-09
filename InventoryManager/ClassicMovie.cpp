@@ -50,6 +50,17 @@ void ClassicMovie::setReleaseDate(std::string releaseDate)
 
 bool ClassicMovie::operator==(const ClassicMovie & other) const
 {
+	if (this == &other)
+	{
+		return true;
+	} else if (this->getTitle() == other.getTitle() &&
+		this->getReleaseDate() == other.getReleaseDate() &&
+		this->getDistributionType() == other.getDistributionType() &&
+		this->getDirector() == other.getDirector() &&
+		this->getMajorActorName() == other.getMajorActorName())
+	{
+		return true;
+	}
 	return false;
 }
 

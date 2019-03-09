@@ -10,6 +10,16 @@ ComedyMovie::~ComedyMovie()
 
 bool ComedyMovie::operator==(const ComedyMovie & other) const
 {
+	if (this == &other)
+	{
+		return true;
+	} else if (this->getTitle() == other.getTitle() &&
+		this->getReleaseDate() == other.getReleaseDate() &&
+		this->getDistributionType() == other.getDistributionType() &&
+		this->getDirector() == other.getDirector())
+	{
+		return true;
+	}
 	return false;
 }
 
