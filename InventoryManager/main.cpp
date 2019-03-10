@@ -31,6 +31,17 @@ int main(int argc, const char* argv[])
 	cout << "input string to fMovie1: " << comedyMovieData << endl;
 	cout << "fMovie1 contents after construction: " << endl;
 	cout << "distribution Type: " << fMovie1.getDistributionType() << ", director: " << fMovie1.getDirector() << ", title: " << fMovie1.getTitle() << ", releaseDate: " << fMovie1.getReleaseDate() << endl;
+	cout << endl;
+
+	// test ClassicMovie
+	string classicMovieData = "Michael Curtiz, Casablanca, Ingrid Bergman 8 1942";
+	ClassicMovie cMovie1(classicMovieData);
+	cout << "input string to cMovie1: " << classicMovieData << endl;
+	cout << "cMovie1 contents after construction: " << endl;
+	cout << "distribution Type: " << cMovie1.getDistributionType() << ", director: " << cMovie1.getDirector() << ", title: " << cMovie1.getTitle() << ", releaseDate: " << cMovie1.getReleaseDate() << 
+		", majorActor: " << cMovie1.getMajorActorName() << ", releaseMonth: " << cMovie1.getReleaseMonth() << ", releaseYear: " << cMovie1.getReleaseYear() << endl;
+	cout << endl;
+
 	cout << "end test" << endl;
 
 	//ifstream infileCustomers("data4customers.txt");

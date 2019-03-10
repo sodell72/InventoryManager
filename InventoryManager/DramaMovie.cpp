@@ -2,6 +2,22 @@
 
 DramaMovie::DramaMovie(std::string dramaMovieData) : Movie()
 {
+	std::vector<std::string> vec;
+	std::stringstream ss(dramaMovieData);
+	std::string token;
+	while (std::getline(ss, token, ','))
+	{
+		token = trim(token);
+		vec.push_back(token);
+	}
+	if (vec.size() != 3)
+	{
+		throw std::invalid_argument("Drama movie data should contain director, title, and releaseDate");
+	}
+
+	this->setDirector(vec[0]);
+	this->setTitle(vec[1]);
+	this->setReleaseDate(vec[2]);
 }
 
 DramaMovie::~DramaMovie()
