@@ -1,6 +1,6 @@
 #include "ClassicMovie.h"
 
-ClassicMovie::ClassicMovie(std::string classicMovieData) : Movie(classicMovieData)
+ClassicMovie::ClassicMovie(std::string classicMovieData) : Movie()
 {
 }
 
@@ -40,7 +40,7 @@ std::string ClassicMovie::getReleaseYear() const
 
 std::string ClassicMovie::getReleaseDate() const
 {
-	return this->getReleaseMonth + " " + this->getReleaseYear;
+	return this->getReleaseMonth() + " " + this->getReleaseYear();
 }
 
 void ClassicMovie::setReleaseDate(std::string releaseDate)
@@ -66,7 +66,7 @@ bool ClassicMovie::operator==(const ClassicMovie & other) const
 
 bool ClassicMovie::operator<(const ClassicMovie & other) const
 {
-	if (this->getReleaseDate == other.getReleaseDate())
+	if (this->getReleaseDate() == other.getReleaseDate())
 	{
 		return this->getMajorActorName() < other.getMajorActorName();
 	}

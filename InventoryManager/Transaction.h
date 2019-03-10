@@ -34,7 +34,7 @@ public:
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Transaction constructor, initializes with transaction type
 	//----------------------------------------------------------------------------------------------
-	transaction(string transactiontype, Movie* m);
+	transaction(char transactiontype, Movie* m);
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Destructor for transaction object
 	//----------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public:
 	//------------------------------------settransactiontype----------------------------------------
 	// Description: setter for transaction type
 	//----------------------------------------------------------------------------------------------
-	void settransactiontype(string transactiontype);
+	void settransactiontype(char transactiontype);
 	//------------------------------------setnexttransaction----------------------------------------
 	// Description: setter for next transaction for a given transaction in the list
 	//----------------------------------------------------------------------------------------------

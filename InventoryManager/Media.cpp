@@ -1,8 +1,9 @@
 #include "Media.h"
 
 
-Media::Media(std::string mediaData)
+Media::Media()
 {
+	this->setDistributionType('D');
 }
 
 Media::~Media()
@@ -37,4 +38,16 @@ std::string Media::getTitle() const
 char Media::getDistributionType() const
 {
 	return this->distributionType;
+}
+
+std::string Media::trim(const std::string& input)
+{
+	if (input.empty()) return ""; // return empty string if all spaces
+
+	size_t front = 0; // tracks front index
+	size_t back = input.size() - 1; // tracks back index
+
+	while (front < back && isspace(input[front])) front++;
+	while (front < back && isspace(input[back])) back--;
+	return std::string(input, front, back + 1);
 }

@@ -10,11 +10,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 #pragma once
 #include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <cctype>
+#include <locale>
+#include <iostream>
 
 class Media
 {
 
-private:
+protected:
 	std::string releaseDate;
 	std::string title;
 	char distributionType; // DVD, CD, VHS, etc...
@@ -29,16 +36,6 @@ public:
 	// Description: destructor, destroys dynamically allocated Media object
 	// ---------------------------------------------------------------------------------------------------
 	~Media();
-
-	// ------------------------------------==-----------------------------------------------
-	// Description: performs equality comparison
-	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator==(const Media & other) const;
-
-	// ------------------------------------<-----------------------------------------------
-	// Description: performs less than comparison
-	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator<(const Media& other) const;
 
 	// ------------------------------------setReleaseDate-----------------------------------------------
 	// Description: setter for release date
@@ -58,20 +55,23 @@ public:
 	// ------------------------------------getReleaseDate-----------------------------------------------
 	// Description: getter for releaseDate
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getReleaseDate() = 0;
+	virtual std::string getReleaseDate() const;
 
 	// ------------------------------------getTitle-----------------------------------------------
 	// Description: getter for title
 	// ---------------------------------------------------------------------------------------------------
-	virtual std::string getTitle();
+	virtual std::string getTitle() const;
 
 	// ------------------------------------getDistributionType-----------------------------------------------
 	// Description: getter for distributionType
 	// ---------------------------------------------------------------------------------------------------
-	virtual char getDistributionType();
+	virtual char getDistributionType() const;
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index
 	// ---------------------------------------------------------------------------------------------------
-	virtual int hash(int ID);
+	//virtual int hash(int ID);
+
+	std::string trim(const std::string& input);
+
 };

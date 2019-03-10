@@ -1,6 +1,6 @@
 #include "Movie.h"
 
-Movie::Movie(std::string movieData) : Media(movieData)
+Movie::Movie() : Media()
 {
 }
 

@@ -84,6 +84,6 @@ public:
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index
 	// ---------------------------------------------------------------------------------------------------
-	virtual int hash(int ID);
+	//virtual int hash(int ID);
 
 };

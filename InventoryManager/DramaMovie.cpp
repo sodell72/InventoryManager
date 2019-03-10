@@ -1,6 +1,6 @@
 #include "DramaMovie.h"
 
-DramaMovie::DramaMovie(std::string dramaMovieData) : Movie(dramaMovieData)
+DramaMovie::DramaMovie(std::string dramaMovieData) : Movie()
 {
 }
 

@@ -8,7 +8,7 @@
 //------------------------------------Transaction-----------------------------------------------
 // Description: Transaction constructor, initializes with transactiontype and Movie
 //----------------------------------------------------------------------------------------------
-transaction::transaction(string transactiontype, Movie* m)
+transaction::transaction(char transactiontype, Movie* m)
 {
 	this->settransactiontype(transactiontype);
 	this->m = m;
@@ -23,7 +23,7 @@ transaction::~transaction()
 //------------------------------------settransactiontype----------------------------------------
 // Description: setter for transactiontype
 //----------------------------------------------------------------------------------------------
-void transaction::settransactiontype(string transactiontype)
+void transaction::settransactiontype(char transactiontype)
 {
 	if (transactiontype == 'B' || transactiontype == 'R')
 		this->transactiontype = transactiontype;

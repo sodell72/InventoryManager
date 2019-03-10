@@ -13,7 +13,7 @@
 
 class Movie : public Media {
 
-private:
+protected:
 	std::string director; // stores the director of the Movie's name
 
 public:
@@ -32,28 +32,13 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	void setDirector(std::string director);
 
-	// ------------------------------------getReleaseDate-----------------------------------------------
-	// Description: getter for ReleaseDate
-	// ---------------------------------------------------------------------------------------------------
-	std::string getReleaseDate();
-
 	// ------------------------------------getDirector-----------------------------------------------
 	// Description: getter for director
 	// ---------------------------------------------------------------------------------------------------
-	std::string getDirector();
-
-	// ------------------------------------==-----------------------------------------------
-	// Description: performs equality comparison
-	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator==(const Media & other) const;
-
-	// ------------------------------------<-----------------------------------------------
-	// Description: performs less than comparison
-	// ---------------------------------------------------------------------------------------------------
-	virtual bool operator<(const Media& other) const;
+	std::string getDirector() const;
 
 	// ------------------------------------hash-----------------------------------------------
 	// Description: hashing function, takes in object ID and outputs index
 	// ---------------------------------------------------------------------------------------------------
-	virtual int hash(int ID);
+	//virtual int hash(int ID);
 };

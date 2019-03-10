@@ -12,11 +12,26 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "Media.h"
+#include "Movie.h"
+#include "ClassicMovie.h"
+#include "DramaMovie.h"
+#include "ComedyMovie.h"
+#include "Customer.h"
+#include "Transaction.h"
 
 using namespace std;
 
 int main(int argc, const char* argv[])
 {
+
+	// test Comedy Movie
+	string comedyMovieData = "Nora Ephron, Sleepless in Seattle, 1993";
+	ComedyMovie fMovie1(comedyMovieData);
+	cout << "input string to fMovie1: " << comedyMovieData << endl;
+	cout << "fMovie1 contents after construction: " << endl;
+	cout << "distribution Type: " << fMovie1.getDistributionType() << ", director: " << fMovie1.getDirector() << ", title: " << fMovie1.getTitle() << ", releaseDate: " << fMovie1.getReleaseDate() << endl;
+	cout << "end test" << endl;
 
 	//ifstream infileCustomers("data4customers.txt");
 	//if (!infileCustomers)
