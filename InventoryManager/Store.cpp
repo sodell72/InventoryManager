@@ -1,5 +1,13 @@
 #include "Store.h"
 
+Store::Store()
+{
+}
+
+Store::~Store()
+{
+}
+
 bool Store::performCommand(std::string command)
 {
 	char commandType = command[0];
@@ -16,6 +24,16 @@ bool Store::performCommand(std::string command)
 	default:
 		cout << "command: \"" << command << "\" is invalid";
 		return false;
+	}
+	return false;
+}
+
+bool Store::validateMovieCode(char videoCode)
+{
+	videoCode = std::toupper(videoCode);
+	if (this->validMovieCodes.find(videoCode) != validMovieCodes.end())
+	{
+		return true;
 	}
 	return false;
 }

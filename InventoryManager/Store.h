@@ -7,16 +7,19 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <regex>
+#include <unordered_set>
 
 
 class Store
 {
 
+	unordered_set<char> validMovieCodes = { 'C', 'D', 'F' };
 
 private:
 
 
-	bool validateVideoCode(char videoCode);
+	bool validateMovieCode(char videoCode);
 	bool validateActionCode(char actionCode);
 	bool validateCustomerId(int id);
 
@@ -30,10 +33,8 @@ private:
 public:
 
 	Store();
+	~Store();
 
 	bool performCommand(std::string command);
-
-
-
 
 };
