@@ -87,6 +87,12 @@ transaction* Customer::gettransactionhead()
 void Customer::addtransaction(char transactiontype, Movie* m)
 {
 	transaction T(transactiontype,m);
+	if (this->gettransactionhead()== NULL)
+	{
+		this->settransactionhead(&T);
+		return;
+	}
+
 	T.setnext(this->gettransactionhead());
 	this->settransactionhead(&T);
 }

@@ -13,9 +13,6 @@
 
 class ClassicMovie : public Movie
 {
-
-	friend std::ostream & operator<<(std::ostream & out, const ClassicMovie& classicMovie);
-
 private:
 
 	std::string majorActorName; // stores the major Actor's from the classic movie

@@ -111,14 +111,3 @@ bool ClassicMovie::operator<(const ClassicMovie & other) const
 	}
 	return std::stoi(this->getReleaseYear()) < std::stoi(other.getReleaseYear());
 }
-
-std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
-{
-	out << "genre: classic" << std::endl;
-	out << "title: " << classicMovie.getTitle() << std::endl;
-	out << "release date: " << classicMovie.getReleaseDate() << std::endl;
-	out << "distribution type: " << classicMovie.getDistributionType() << std::endl;
-	out << "director: " << classicMovie.getDirector() << std::endl;
-	out << "major actor name: " << classicMovie.getMajorActorName() << std::endl;
-	return out;
-}

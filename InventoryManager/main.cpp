@@ -12,6 +12,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "Store.h"
 #include "Media.h"
 #include "Movie.h"
 #include "ClassicMovie.h"
@@ -24,7 +25,7 @@ using namespace std;
 
 int main(int argc, const char* argv[])
 {
-
+	/*
 	// test Comedy Movie
 	string comedyMovieData = "Nora Ephron, Sleepless in Seattle, 1993";
 	ComedyMovie fMovie1(comedyMovieData);
@@ -42,10 +43,32 @@ int main(int argc, const char* argv[])
 		", majorActor: " << cMovie1.getMajorActorName() << ", releaseMonth: " << cMovie1.getReleaseMonth() << ", releaseYear: " << cMovie1.getReleaseYear() << endl;
 	cout << endl;
 
-	// test << for ClassicMovie
-	cout << cMovie1;
-
 	cout << "end test" << endl;
+
+	*/
+
+	// part 1
+	ifstream infile1("data4customers.txt");
+	if (!infile1) {
+		cout << "File could not be opened." << endl;
+		return 1;
+	}
+
+	ifstream infile2("data4movies.txt");
+	if (!infile1) {
+		cout << "File could not be opened." << endl;
+		return 1;
+	}
+
+	Store s1;
+
+	s1.addstorecustomers(infile1);
+	s1.displaycustomers();
+	s1.addstoremovies(infile2);
+	s1.displaystoremovies();
+
+
+	//G.buildGraph(infile1);
 
 	//ifstream infileCustomers("data4customers.txt");
 	//if (!infileCustomers)
@@ -74,5 +97,5 @@ int main(int argc, const char* argv[])
 	//	myStore.performCommand(command);
 	//}
 
-	cin.get();
+	//cin.get();
 }

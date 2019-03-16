@@ -27,16 +27,11 @@ ComedyMovie::~ComedyMovie()
 bool ComedyMovie::operator==(const ComedyMovie & other) const
 {
 	if (this == &other)
-	{
 		return true;
-	} else if (this->getTitle() == other.getTitle() &&
-		this->getReleaseDate() == other.getReleaseDate() &&
-		this->getDistributionType() == other.getDistributionType() &&
-		this->getDirector() == other.getDirector())
-	{
+	else if (this->getTitle() == other.getTitle() && this->getReleaseDate() == other.getReleaseDate())
 		return true;
-	}
-	return false;
+	else
+	    return false;
 }
 
 bool ComedyMovie::operator<(const ComedyMovie & other) const
@@ -46,14 +41,4 @@ bool ComedyMovie::operator<(const ComedyMovie & other) const
 		return std::stoi(this->getReleaseDate()) < std::stoi(other.getReleaseDate());
 	}
 	return this->getTitle() < other.getTitle();
-}
-
-std::ostream & operator<<(std::ostream & out, const ComedyMovie & comedyMovie)
-{
-	out << "genre: comedy" << std::endl;
-	out << "title: " << comedyMovie.getTitle() << std::endl;
-	out << "release date: " << comedyMovie.getReleaseDate() << std::endl;
-	out << "distribution type: " << comedyMovie.getDistributionType() << std::endl;
-	out << "director: " << comedyMovie.getDirector() << std::endl;
-	return out;
 }

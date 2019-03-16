@@ -13,7 +13,7 @@
 
 #ifndef CUSTOMER_H_
 #define CUSTOMER_H_
-#pragma once;
+#pragma once
 #include <string>
 #include "transaction.h"
 using namespace std;

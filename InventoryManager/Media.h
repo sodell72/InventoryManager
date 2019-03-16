@@ -18,7 +18,6 @@
 #include <locale>
 #include <iostream>
 
-
 class Media
 {
 
