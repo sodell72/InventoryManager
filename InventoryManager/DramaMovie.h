@@ -13,6 +13,9 @@
 
 class DramaMovie : public Movie
 {
+
+	friend std::ostream & operator<<(std::ostream & out, const DramaMovie& dramaMovie);
+
 private:
 
 public:
@@ -25,6 +28,8 @@ public:
 	// Description: destructor, destroys dynamically allocated DramaMovie object
 	// ---------------------------------------------------------------------------------------------------
 	~DramaMovie();
+
+	
 
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison
