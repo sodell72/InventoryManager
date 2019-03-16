@@ -42,6 +42,9 @@ int main(int argc, const char* argv[])
 		", majorActor: " << cMovie1.getMajorActorName() << ", releaseMonth: " << cMovie1.getReleaseMonth() << ", releaseYear: " << cMovie1.getReleaseYear() << endl;
 	cout << endl;
 
+	// test << for ClassicMovie
+	cout << cMovie1;
+
 	cout << "end test" << endl;
 
 	//ifstream infileCustomers("data4customers.txt");
