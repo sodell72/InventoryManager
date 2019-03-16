@@ -63,10 +63,21 @@ int main(int argc, const char* argv[])
 
 	Store s1;
 
+	cout << "TESTING addstorecustomers:" << endl;
 	s1.addstorecustomers(infileCustomers);
+	cout << endl;
+
+	cout << "TESTING displaycustomers:" << endl;
 	s1.displaycustomers();
+	cout << endl;
+
+	cout << "TESTING addstoremovies:" << endl;
 	s1.addstoremovies(infileMovies);
+	cout << endl;
+
+	cout << "TESTING displaystoremovies:" << endl;
 	s1.displaystoremovies();
+	cout << endl;
 
 	ifstream infileCommands("data4commands.txt");
 	if (!infileCommands)
@@ -75,6 +86,7 @@ int main(int argc, const char* argv[])
 		return 1;
 	}
 
+	cout << "TESTING performCommand:" << endl;
 	while (!infileCommands.eof())
 	{
 		string command;
