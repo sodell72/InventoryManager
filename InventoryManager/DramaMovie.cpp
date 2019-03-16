@@ -50,6 +50,7 @@ bool DramaMovie::operator<(const DramaMovie & other) const
 
 std::ostream & operator<<(std::ostream & out, const DramaMovie & dramaMovie)
 {
+	out << "genre: drama" << std::endl;
 	out << "title: " << dramaMovie.getTitle() << std::endl;
 	out << "release date: " << dramaMovie.getReleaseDate() << std::endl;
 	out << "distribution type: " << dramaMovie.getDistributionType() << std::endl;

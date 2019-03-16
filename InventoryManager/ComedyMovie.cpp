@@ -50,6 +50,7 @@ bool ComedyMovie::operator<(const ComedyMovie & other) const
 
 std::ostream & operator<<(std::ostream & out, const ComedyMovie & comedyMovie)
 {
+	out << "genre: comedy" << std::endl;
 	out << "title: " << comedyMovie.getTitle() << std::endl;
 	out << "release date: " << comedyMovie.getReleaseDate() << std::endl;
 	out << "distribution type: " << comedyMovie.getDistributionType() << std::endl;
