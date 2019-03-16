@@ -13,6 +13,8 @@
 
 class ComedyMovie : public Movie
 {
+	friend std::ostream & operator<<(std::ostream & out, const ComedyMovie& comedyMovie);
+
 private:
 
 
