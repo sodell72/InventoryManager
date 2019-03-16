@@ -126,7 +126,28 @@ void Store::displaystorestree(movienode* head)
 		return;
 
 	displaystorestree(head->left);
-	cout<<head->moviedetails->getDirector()<<endl;
+	switch(head->movietype)
+	{
+	case 'F':
+		{
+			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
+			cout << *(static_cast<ComedyMovie*>(head->moviedetails));
+			break;
+		}
+	case 'C':
+		{
+			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
+			cout << *(static_cast<ClassicMovie*>(head->moviedetails));
+			break;
+		}
+	case 'D':
+		{
+			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
+			cout << *(static_cast<DramaMovie*>(head->moviedetails));
+			break;
+		}
+	}
+
 	displaystorestree(head->right);
 
 	return;
@@ -268,7 +289,9 @@ bool Store::performReturnCommand(std::string command)
 
 bool Store::performInventoryCommand(std::string command)
 {
-	return false;
+	displaystoremovies();
+
+	return true;
 }
 
 bool Store::performHistoryCommand(std::string command)
