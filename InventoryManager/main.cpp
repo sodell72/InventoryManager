@@ -117,18 +117,18 @@ int main(int argc, const char* argv[])
 	cout << "TESTING History:" << endl;
 	string testhistory1 = "H 1000";
 	string testhistory2 = "H 8000";
-	s1.performCommand(testhistory1);
+	//s1.performCommand(testhistory1);
 	cout << endl;
-	s1.performCommand(testhistory2);
+	//s1.performCommand(testhistory2);
 	cout << endl;
 
 
-	ifstream infileCommands("data4commands.txt");
-	if (!infileCommands)
-	{
+	//ifstream infileCommands("data4commands.txt");
+	//if (!infileCommands)
+	//{
 
-			return 1;
-	}
+	//		return 1;
+	//}
 
 	//cout << "TESTING performCommand:" << endl;
 	//while (!infileCommands.eof())
