@@ -76,6 +76,8 @@ string Customer::getfirstname()
 {
 	return this->firstname;
 }
+
+
 //------------------------------------gettransactionhead----------------------------------------------
 // Description: getter for transaction head
 //----------------------------------------------------------------------------------------------
@@ -84,17 +86,32 @@ transaction* Customer::gettransactionhead()
 	return this->head;
 }
 
-void Customer::addtransaction(char transactiontype, Movie* m)
+void Customer::addtransaction(transaction* T)
 {
-	transaction T(transactiontype,m);
+	cout<<"Inside add transaction"<<endl;
+
 	if (this->gettransactionhead()== NULL)
 	{
-		this->settransactionhead(&T);
+		this->settransactionhead(T);
+		cout<<this->gettransactionhead()->gettransactiontype()<<endl;
 		return;
 	}
 
-	T.setnext(this->gettransactionhead());
-	this->settransactionhead(&T);
+	transaction* temp = this->gettransactionhead();
+	this->settransactionhead(T);
+	T->setnext(temp);
+
+
+	cout<<"Next Transaction Type"<<endl;
+	cout<<this->gettransactionhead()->getnext()->gettransactiontype()<<endl;
+	cout<<this->gettransactionhead()->getnext()<<endl;
+	cout<<"Head Transaction Type"<<endl;
+	cout<<this->gettransactionhead()->gettransactiontype()<<endl;
+	cout<<this->gettransactionhead()<<endl;
+
 }
+
+
+
 
 

@@ -70,7 +70,7 @@ public:
 	//------------------------------------AddTransactiontoaCustomer----------------------------------
 	// Description: add transaction to the customer
 	//-----------------------------------------------------------------------------------------------
-	void addtransaction(char transactiontype, Movie* m);
+	void addtransaction(transaction* T);
 
 };
 

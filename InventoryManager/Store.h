@@ -5,7 +5,7 @@
 #include "DramaMovie.h"
 #include "ClassicMovie.h"
 #include "Customer.h"
-#include "Transaction.h"
+#include "transaction.h"
 #include <map>
 #include <vector>
 #include <string>
@@ -64,6 +64,9 @@ private:
 	void insertclassichashtable(string moviedetails, ClassicMovie* classicmovie);
 	void insertdramahashtable(string moviedetails, DramaMovie* dramamovie);
 	vector<string> parsemoviedetails(string moviedetails);
+	vector<string> parsecommanddetails(string command);
+	Customer* fetchcustomerobject(int customerid);
+	bool validateifcustomerborrowedtheitem(Customer* cust,Movie* moviereturn);
 
 	bool performBorrowCommand(string command);
 	bool performReturnCommand(string command);
