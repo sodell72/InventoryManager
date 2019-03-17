@@ -47,55 +47,55 @@ int main(int argc, const char* argv[])
 
 	*/
 
+
+
 	// part 1
-	ifstream infile1("data4customers.txt");
-	if (!infile1) {
+	ifstream infileCustomers("data4customers.txt");
+	if (!infileCustomers)
+	{
 		cout << "File could not be opened." << endl;
 		return 1;
 	}
 
-	ifstream infile2("data4movies.txt");
-	if (!infile2) {
+	ifstream infileMovies("data4movies.txt");
+	if (!infileMovies)
+	{
 		cout << "File could not be opened." << endl;
 		return 1;
 	}
 
 	Store s1;
 
-	s1.addstorecustomers(infile1);
-	//s1.displaycustomers();
-	s1.addstoremovies(infile2);
 	s1.displaystoremovies();
+	cout << "TESTING addstorecustomers:" << endl;
+	s1.addstorecustomers(infileCustomers);
+	cout << endl;
 
+	cout << "TESTING displaycustomers:" << endl;
+	s1.displaycustomers();
+	cout << endl;
 
-	//G.buildGraph(infile1);
+	cout << "TESTING addstoremovies:" << endl;
+	s1.addstoremovies(infileMovies);
+	cout << endl;
 
-	//ifstream infileCustomers("data4customers.txt");
-	//if (!infileCustomers)
-	//{
-	//	cout << "Customers file could not be opened." << endl;
-	//	return 1;
-	//}
-	//ifstream infileMovies("data4movies.txt");
-	//if (!infileMovies)
-	//{
-	//	cout << "Movies file could not be opened." << endl;
-	//	return 1;
-	//}
-	//ifstream infileCommands("data4commands.txt");
-	//if (!infileCommands)
-	//{
-	//	cout << "Commands file could not be opened." << endl;
-	//	return 1;
-	//}
+	cout << "TESTING displaystoremovies:" << endl;
+	s1.displaystoremovies();
+	cout << endl;
 
-	//Store myStore(infileCustomers, infileMovies);
+	ifstream infileCommands("data4commands.txt");
+	if (!infileCommands)
+	{
+
+			return 1;
+	}
+
+	//cout << "TESTING performCommand:" << endl;
 	//while (!infileCommands.eof())
 	//{
-	//	string command;
-	//	getline(infileCommands, command);
-	//	myStore.performCommand(command);
+	//		string command;
 	//}
-
-	//cin.get();
 }
+
+
+

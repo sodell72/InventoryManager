@@ -432,6 +432,11 @@ bool Store::validateMovieCode(char videoCode)
 	return false;
 }
 
+bool Store::validateActionCode(char actionCode)
+{
+	return false;
+}
+
 bool Store::validateCustomerId(int id)
 {
 	for (int i = 0; i < (int)this->storecustomers.size();i++)
@@ -461,6 +466,24 @@ bool Store::performInventoryCommand(std::string command)
 
 bool Store::performHistoryCommand(std::string command)
 {
+	int customerId = stoi(command.substr(2));
+	for (pair<int, Customer*> pair : storecustomers)
+	{
+		if (pair.first == customerId)
+		{
+			transaction* currentTransaction = pair.second->gettransactionhead();
+			while (currentTransaction != nullptr)
+			{
+				cout << currentTransaction->gettransactiontype();
+				currentTransaction = currentTransaction->getnext();
+				if (currentTransaction != nullptr)
+				{
+					cout << ", ";
+				}
+			}
+			return true;
+		}
+	}
 	return false;
 }
 
