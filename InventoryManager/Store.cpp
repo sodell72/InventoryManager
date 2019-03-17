@@ -729,11 +729,30 @@ bool Store::performHistoryCommand(std::string command)
 			}
 			while (currentTransaction != nullptr)
 			{
-				cout << currentTransaction->gettransactiontype();
-				currentTransaction = currentTransaction->getnext();
-				if (currentTransaction != nullptr)
+				char moviecode = currentTransaction->getmoviecode();
+				switch (moviecode)
 				{
-					cout << ", ";
+				case 'F':
+				{
+					//cout<<customerId<<" ";
+					cout<< currentTransaction->gettransactiontype()<<" ";
+					cout<<*(static_cast<ComedyMovie*>(currentTransaction->getmovie()))<<endl;
+					break;
+				}
+				case 'D':
+				{
+					//cout<<customerId<<" ";
+					cout<< currentTransaction->gettransactiontype()<<" ";
+					cout<<*(static_cast<DramaMovie*>(currentTransaction->getmovie()))<<endl;
+					break;
+				}
+				case 'C':
+				{
+					//cout<<customerId<<" ";
+					cout<< currentTransaction->gettransactiontype()<<" ";
+					cout<<*(static_cast<ClassicMovie*>(currentTransaction->getmovie()))<<endl;
+					break;
+				}
 				}
 			}
 			return true;
