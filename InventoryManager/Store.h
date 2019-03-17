@@ -58,7 +58,12 @@ private:
 	bool validateMovieCode(char videoCode);
 	bool validateActionCode(char actionCode);
 	bool validateCustomerId(int id);
-	bool movieFound(char moviecode,string moviedetails);
+	Movie* moviefoundininventory(char moviecode,string moviedetails);
+	Movie* moviefoundinhashtable(char moviecode, string moviedetails);
+	void insertcomedyhashtable(string moviedetails, ComedyMovie *comedymovie);
+	void insertclassichashtable(string moviedetails, ClassicMovie* classicmovie);
+	void insertdramahashtable(string moviedetails, DramaMovie* dramamovie);
+	vector<string> parsemoviedetails(string moviedetails);
 
 	bool performBorrowCommand(string command);
 	bool performReturnCommand(string command);
@@ -68,6 +73,10 @@ private:
 	void displaystorestree(movienode* head);
 	void comedymoviehash(string moviedetails);
 	int hashfunction(string moviedetails);
+	bool updateinventorycounts(char moviecode, Movie* m,int v);
+	void recursiveupdate(char moviecode, movienode* mnode,Movie* movieininventory,int value);
+
+	std::string trim(const std::string& input);
 
 
 

@@ -55,7 +55,7 @@ int main(int argc, const char* argv[])
 	}
 
 	ifstream infile2("data4movies.txt");
-	if (!infile1) {
+	if (!infile2) {
 		cout << "File could not be opened." << endl;
 		return 1;
 	}
@@ -63,7 +63,7 @@ int main(int argc, const char* argv[])
 	Store s1;
 
 	s1.addstorecustomers(infile1);
-	s1.displaycustomers();
+	//s1.displaycustomers();
 	s1.addstoremovies(infile2);
 	s1.displaystoremovies();
 
