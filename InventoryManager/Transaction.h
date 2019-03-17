@@ -34,7 +34,7 @@ public:
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Transaction constructor, initializes with transaction type
 	//----------------------------------------------------------------------------------------------
-	transaction(char transactiontype, Movie* m);
+	transaction(string transactiontype, Movie* m);
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Destructor for transaction object
 	//----------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public:
 	//------------------------------------settransactiontype----------------------------------------
 	// Description: setter for transaction type
 	//----------------------------------------------------------------------------------------------
-	void settransactiontype(char transactiontype);
+	void settransactiontype(string transactiontype);
 	//------------------------------------setnexttransaction----------------------------------------
 	// Description: setter for next transaction for a given transaction in the list
 	//----------------------------------------------------------------------------------------------
@@ -50,11 +50,16 @@ public:
 	//------------------------------------gettransactiontype----------------------------------------
 	// Description: getter for transaction type for a transaction
 	//----------------------------------------------------------------------------------------------
-	string gettransactiontype();
+	string& gettransactiontype();
+
 	//------------------------------------getnexttransaction----------------------------------------
 	// Description: getter for transaction next transaction from the transaction list
 	//----------------------------------------------------------------------------------------------
 	transaction* getnext();
+	//------------------------------------getmovie-------
+	// Description: getter for movie in the transaction
+	//-----------------------------------------------------
+	Movie* getmovie();
 };
 
 

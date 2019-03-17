@@ -8,10 +8,11 @@
 //------------------------------------Transaction-----------------------------------------------
 // Description: Transaction constructor, initializes with transactiontype and Movie
 //----------------------------------------------------------------------------------------------
-transaction::transaction(char transactiontype, Movie* m)
+transaction::transaction(string transactiontype, Movie* m)
 {
 	this->settransactiontype(transactiontype);
 	this->m = m;
+	this->next = NULL;
 }
 //------------------------------------Transaction-----------------------------------------------
 // Description: Destructor for transaction object
@@ -23,10 +24,11 @@ transaction::~transaction()
 //------------------------------------settransactiontype----------------------------------------
 // Description: setter for transactiontype
 //----------------------------------------------------------------------------------------------
-void transaction::settransactiontype(char transactiontype)
+void transaction::settransactiontype(string transactiontype)
 {
-	if (transactiontype == 'B' || transactiontype == 'R')
+	if (transactiontype == "B" || transactiontype == "R")
 		this->transactiontype = transactiontype;
+
 }
 //------------------------------------settransactiontype----------------------------------------
 // Description: setter for next transaction for a given transaction in the list
@@ -38,16 +40,27 @@ void transaction::setnext(transaction* next)
 //------------------------------------settransactiondate----------------------------------------
 // Description: getter for transaction type for a transaction
 //----------------------------------------------------------------------------------------------
-string transaction::gettransactiontype()
+string& transaction::gettransactiontype()
 {
 	return this->transactiontype;
 }
+
+
+
 //------------------------------------settransactiondate----------------------------------------
 // Description: getter for transaction next transaction from the transaction list
 //----------------------------------------------------------------------------------------------
 transaction* transaction::getnext()
 {
 	return this->next;
+}
+
+//------------------------------------getmovie-------
+// Description: getter for movie in the transaction
+//-----------------------------------------------------
+Movie* transaction::getmovie()
+{
+	return this->m;
 }
 
 

@@ -535,21 +535,122 @@ bool Store::performBorrowCommand(std::string command)
 	 * update stock count for the borrow transaction. If the stock goes below 0, it will print a message and
 	 * will not update the stock
 	 ***********************************************************************************************/
-
 	updateinventorycounts(moviecode[0],movieborrow,-1);
 
-	//Create a new transaction for the borrow transaction
-	transaction borrow('B', movieborrow);
-
+	//Create a new transaction
+	transaction* T = new transaction("B",movieborrow);
+	cout <<"Transaction Type "<<T->gettransactiontype()<<endl;
 	//add transaction to the customer
-	cust->addtransaction('B', movieborrow);
+	cust->addtransaction(T);
 
 	return true;
 }
 
+bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
+{
+	cout<<"inside validate transactions"<<endl;
+
+	transaction* cur = cust->gettransactionhead();
+
+	int borrowcount = 0;
+	int returncount = 0;
+
+	while (cur != NULL)
+	{
+		cout<<"inside validate transactions linkedlist loop"<<endl;
+
+		string transactiontype = cur->gettransactiontype();
+		cout<<"Transaction Type "<<transactiontype<<endl;
+
+		if (cur->gettransactiontype() == "B" && cur->getmovie() == movie)
+			borrowcount++;
+		else if (cur->gettransactiontype() == "R" && cur->getmovie() == movie)
+			returncount++;
+
+		cout<<"end of loop iteration"<<endl;
+		cout<<"Borrow Count : "<<borrowcount<<endl;
+		cout<<"return Count : "<<returncount<<endl;
+		cur=cur->getnext();
+	}
+
+	//verifying if the borrow transaction count is greater than return
+	if (borrowcount > returncount)
+		return true;
+
+
+	return false;
+}
+
 bool Store::performReturnCommand(std::string command)
 {
-	return false;
+	cout <<"inside return"<< endl;
+	vector<string> vec = parsecommanddetails(command);
+	cout <<"After Parse command"<<endl;
+	string moviecode = vec[3];
+	Movie* moviereturn;
+	string moviedetails;
+
+	//check if the movie code is valid
+	if (!validateMovieCode(moviecode[0]))
+	{
+		cout<<"invalid movie code : "<<moviecode<<endl;
+		return false;
+	}
+
+	//check if the customer id is valid
+	stringstream ss(vec[1]);
+	int customerid = 0;
+	ss >> customerid;
+	if (!validateCustomerId(customerid))
+	{
+		cout<<"invalid Customer Id : "<<moviecode<<endl;
+		return false;
+	}
+
+	Customer* cust = fetchcustomerobject(customerid);
+
+	if (cust == NULL)
+	{
+		cout <<"Customer object not found for the ID : "<<customerid<<endl;
+		return false;
+	}
+
+	if (moviecode == "F")
+		moviedetails = vec[4]+vec[5];
+	else if (moviecode == "C")
+		moviedetails = vec[6]+" "+vec[7]+" "+vec[4]+" "+vec[5];
+	else if (moviecode == "D")
+		moviedetails = vec[4]+vec[5];
+
+	moviereturn = moviefoundinhashtable(moviecode[0],moviedetails);
+
+	if (moviereturn == NULL)
+	{
+		cout<<"You cannot return "<<moviedetails<<" as it was never part of the store"<<endl;
+		return false;
+	}
+
+
+	//validate of the customer has an outstanding borrowed movie
+	if (!validateifcustomerborrowedtheitem(cust,moviereturn))
+	{
+		cout<<"Doesn't look like customer id "<<customerid<<" has borrow "<<moviedetails<<endl;
+		return false;
+	}
+
+	/***********************************************************************************************
+	 * update stock count for the return transaction.
+	 ***********************************************************************************************/
+	updateinventorycounts(moviecode[0],moviereturn,1);
+
+	//Create a new transaction
+	transaction* T = new transaction("R",moviereturn);
+	cout <<"Transaction Type "<<T->gettransactiontype()<<endl;
+
+	//add transaction to the customer
+	cust->addtransaction(T);
+
+	return true;
 }
 
 bool Store::performInventoryCommand(std::string command)

@@ -86,7 +86,7 @@ int main(int argc, const char* argv[])
 	cout << "TESTING Borrow:" << endl;
 	string testborrow1 = "B 8000 D F You've Got Mail, 1998";
 	string testborrow2 = "B 1000 D D Barry Levinson, Good Morning Vietnam,";
-	string testborrow3 = "B 1000 D C 5 1940 Katherine Hepburn";
+	/*string testborrow3 = "B 1000 D C 5 1940 Katherine Hepburn";
 	string testborrow4 = "B 1000 D C 5 1940 Katherine Hepburn";
 	string testborrow5 = "B 1000 D C 5 1940 Katherine Hepburn";
 	string testborrow6 = "B 1000 D C 5 1940 Katherine Hepburn";
@@ -96,10 +96,10 @@ int main(int argc, const char* argv[])
 	string testborrow10 = "B 1000 D C 5 1940 Katherine Hepburn";
 	string testborrow11 = "B 1000 D C 5 1940 Katherine Hepburn";
 	string testborrow12 = "B 1000 D C 5 1940 Katherine Hepburn";
-	string testborrow13 = "B 1000 D C 5 1940 Katherine Hepburn";
+	string testborrow13 = "B 1000 D C 5 1940 Katherine Hepburn";*/
 	s1.performCommand(testborrow1);
 	s1.performCommand(testborrow2);
-	s1.performCommand(testborrow3);
+	/*s1.performCommand(testborrow3);
 	s1.performCommand(testborrow4);
 	s1.performCommand(testborrow5);
 	s1.performCommand(testborrow6);
@@ -109,15 +109,26 @@ int main(int argc, const char* argv[])
 	s1.performCommand(testborrow10);
 	s1.performCommand(testborrow11);
 	s1.performCommand(testborrow12);
-	s1.performCommand(testborrow13);
+	s1.performCommand(testborrow13);*/
 
 	cout << "TESTING displaystoremovies:" << endl;
 	s1.displaystoremovies();
 
-	//string testhistory1 = "H 1000";
-	//string testhistory2 = "H 8000";
-	//s1.performCommand(testhistory1);
-	//s1.performCommand(testhistory2);
+	cout << "TESTING Return:" << endl;
+	string testreturn1 = "R 8000 D F You've Got Mail, 1998";
+	string testreturn2 = "R 1000 D D Barry Levinson, Good Morning Vietnam,";
+	string testreturn3 = "R 1000 D C 5 1940 Katherine Hepburn";
+	string testreturn4 = "R 5000 D C 3 1971 Ruth Gordon";
+	s1.performCommand(testreturn1);
+	s1.performCommand(testreturn2);
+	s1.performCommand(testreturn3);
+	s1.performCommand(testreturn4);
+	s1.displaystoremovies();
+
+	/*string testhistory1 = "H 1000";
+	string testhistory2 = "H 8000";
+	s1.performCommand(testhistory1);
+	s1.performCommand(testhistory2);*/
 
 
 	ifstream infileCommands("data4commands.txt");
