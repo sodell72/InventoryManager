@@ -113,7 +113,7 @@ int main(int argc, const char* argv[])
 	s1.performCommand(testreturn4);
 	s1.displaystoremovies();*/
 
-	/*string testhistory1 = "H 1000";
+	string testhistory1 = "H 1000";
 	string testhistory2 = "H 8000";
 	//s1.performCommand(testhistory1);
 	cout << endl;
@@ -121,12 +121,6 @@ int main(int argc, const char* argv[])
 	cout << endl;
 
 
-	//ifstream infileCommands("data4commands.txt");
-	//if (!infileCommands)
-	//{
-
-	//		return 1;
-	//}
 
 }
 
