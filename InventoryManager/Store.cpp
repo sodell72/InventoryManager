@@ -497,7 +497,6 @@ Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 		return moviefoundinhashtable(moviecode,vec[2]);
 	else if (moviecode == 'D')
 		return moviefoundinhashtable(moviecode,vec[0]+vec[1]);
-
 	return NULL;
 }
 
