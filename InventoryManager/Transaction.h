@@ -27,6 +27,8 @@ private:
 	string transactiontype; //will hold value values of the type of transaction such as Borrow, Return, Buy etc.
 	transaction* next; //reference to the next transaction in the list of transactions associated to a customer
 	Movie* m; //Pointer to the Movie object associated with the transaction
+
+	char moviecode; //Type of movie in the transaction
 	//string transactionDate; //can be used in future to hold the transaction date when the transaction happened
 	//string due date can be used in future to set attributes such as due date of borrow transaction
 
@@ -34,7 +36,7 @@ public:
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Transaction constructor, initializes with transaction type
 	//----------------------------------------------------------------------------------------------
-	transaction(string transactiontype, Movie* m);
+	transaction(string transactiontype, Movie* m, char moviecode);
 	//------------------------------------Transaction-----------------------------------------------
 	// Description: Destructor for transaction object
 	//----------------------------------------------------------------------------------------------
@@ -52,6 +54,11 @@ public:
 	//----------------------------------------------------------------------------------------------
 	string& gettransactiontype();
 
+	//------------------------------------gettransactiontype----------------------------------------
+	// Description: getter for transaction type for a transaction
+	//----------------------------------------------------------------------------------------------
+
+	char getmoviecode();
 	//------------------------------------getnexttransaction----------------------------------------
 	// Description: getter for transaction next transaction from the transaction list
 	//----------------------------------------------------------------------------------------------

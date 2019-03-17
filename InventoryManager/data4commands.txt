@@ -27,6 +27,7 @@ B 9999 D F You've Got Mail, 1998
 B 8000 D C 3 1971 Ruth Gordon
 B 1111 D C 10 1941 Humphrey Bogart
 B 8000 D C 3 1971 Ruth Gordon
+I
 X
 B 1111 D C 9 1938 Cary Grant
 B 5000 D C 3 1971 Ruth Gordon
@@ -37,8 +38,11 @@ Z 1000 D C 10 1941 Humphrey Bogart
 B 5000 D C 3 1971 Ruth Gordon
 B 8000 D F National Lampoon's Animal House, 1978
 B 8888 D C 3 1971 Ruth Gordon
+I
+X
 B 7777 D C 3 1971 Ruth Gordon
 B 2000 D C 3 1971 Ruth Gordon
+I
 B 2000 D D Nancy Savoca, Dogfight,
 B 9000 D D Clint Eastwood, Unforgiven,
 B 9000 D F Fargo, 1996

@@ -8,10 +8,12 @@
 //------------------------------------Transaction-----------------------------------------------
 // Description: Transaction constructor, initializes with transactiontype and Movie
 //----------------------------------------------------------------------------------------------
-transaction::transaction(string transactiontype, Movie* m)
+
+transaction::transaction(string transactiontype, Movie* m, char moviecode)
 {
 	this->settransactiontype(transactiontype);
 	this->m = m;
+	this->moviecode = moviecode;
 	this->next = NULL;
 }
 //------------------------------------Transaction-----------------------------------------------
@@ -61,6 +63,12 @@ transaction* transaction::getnext()
 Movie* transaction::getmovie()
 {
 	return this->m;
+}
+
+
+char transaction::getmoviecode()
+{
+	return this->moviecode;
 }
 
 
