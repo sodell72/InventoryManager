@@ -64,6 +64,8 @@ private:
 	void insertclassichashtable(string moviedetails, ClassicMovie* classicmovie);
 	void insertdramahashtable(string moviedetails, DramaMovie* dramamovie);
 	vector<string> parsemoviedetails(string moviedetails);
+	vector<string> parsecommanddetails(string command);
+	Customer* fetchcustomerobject(int customerid);
 
 	bool performBorrowCommand(string command);
 	bool performReturnCommand(string command);
