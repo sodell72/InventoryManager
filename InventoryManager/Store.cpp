@@ -597,8 +597,9 @@ bool Store::performBorrowCommand(std::string command)
 	 ***********************************************************************************************/
 	updateinventorycounts(moviecode[0],movieborrow,-1);
 
+
 	//Create a new transaction
-	transaction* T = new transaction("B",movieborrow);
+	transaction* T = new transaction("B",movieborrow,moviecode[0]);
 
 	//add transaction to the customer
 	cust->addtransaction(T);
@@ -700,8 +701,9 @@ bool Store::performReturnCommand(std::string command)
 	 ***********************************************************************************************/
 	updateinventorycounts(moviecode[0],moviereturn,1);
 
+
 	//Create a new transaction
-	transaction* T = new transaction("R",moviereturn);
+	transaction* T = new transaction("R",moviereturn,moviecode[0]);
 
 	//add transaction to the customer
 	cust->addtransaction(T);
@@ -725,7 +727,7 @@ bool Store::performHistoryCommand(std::string command)
 			transaction* currentTransaction = pair.second->gettransactionhead();
 			if (currentTransaction != nullptr)
 			{
-				cout << "customer# " << customerId << " history: ";
+				cout << "customer# " << customerId << " history: "<<endl;
 			}
 			while (currentTransaction != nullptr)
 			{
@@ -754,6 +756,7 @@ bool Store::performHistoryCommand(std::string command)
 					break;
 				}
 				}
+				currentTransaction = currentTransaction->getnext();
 			}
 			return true;
 		}
