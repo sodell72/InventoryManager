@@ -30,7 +30,7 @@ public:
 	// ------------------------------------~ClassicMovie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated ClassicMovie object
 	// ---------------------------------------------------------------------------------------------------
-	~ClassicMovie();
+	virtual ~ClassicMovie();
 
 	// ------------------------------------setMajorActorName-----------------------------------------------
 	// Description: setter for majorActorName

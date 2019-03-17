@@ -13,6 +13,7 @@
 #include <unordered_set>
 #include <iostream>
 #include <fstream>
+#include <queue>
 using namespace std;
 
 const int ARRAYMAX = 97; //Prime Number for Hashing
@@ -23,6 +24,8 @@ class Store
 public:
 	Store();
 	~Store();
+
+
 	bool performCommand(std::string command);
 	void addstorecustomers(ifstream& customerinfile);
 	void addstoremovies(ifstream& movieinfile);
@@ -81,6 +84,7 @@ private:
 
 	std::string trim(const std::string& input);
 
+	void deleteSubTree(movienode* subTreeTop);
 
 
 };

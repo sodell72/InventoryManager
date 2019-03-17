@@ -28,7 +28,7 @@ public:
 	// ------------------------------------~CommedyMovie-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated ComedyMovie object
 	// ---------------------------------------------------------------------------------------------------
-	~ComedyMovie();
+	virtual ~ComedyMovie();
 
 	// ------------------------------------==-----------------------------------------------
 	// Description: performs equality comparison

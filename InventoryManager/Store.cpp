@@ -16,6 +16,64 @@ Store::Store()
 
 Store::~Store()
 {
+	std::cout << "DESTRUCTOR CALLED" << endl;
+	movienode* heads[3]  = {this->comedymoviehead, this->dramamoviehead, this->classicmoviehead};
+	// deletes node and associated movie
+	for (movienode* headPtr : heads)
+	{
+		deleteSubTree(headPtr);
+	}
+	this->comedymoviehead = nullptr;
+	this->dramamoviehead = nullptr;
+	this->classicmoviehead = nullptr;
+
+	// deletes transactions and customers
+	for (pair<int, Customer*> pair : this->storecustomers)
+	{
+		// deletes transactions in a customer
+		transaction* currentTransaction = pair.second->gettransactionhead();
+		while (currentTransaction != nullptr)
+		{
+			transaction* temp = currentTransaction;
+			currentTransaction = currentTransaction->getnext();
+			delete temp;
+		}
+		pair.second->settransactionhead(nullptr);
+
+		// deletes customers
+		delete pair.second;
+
+	}
+	// do I need to do anything with hash arrays?
+}
+
+// ------------------------------------deleteSubTree-----------------------------------------------
+// Description: deletes the given node and moviedetail objects contained and all the information below it in the tree
+// ---------------------------------------------------------------------------------------------------
+void Store::deleteSubTree(movienode * subTreeTop)
+{
+	if (subTreeTop == nullptr) return;
+	queue<movienode*> deletionQueue;
+	movienode* currentNode = subTreeTop;
+	deletionQueue.push(currentNode);
+	while (!deletionQueue.empty())
+	{
+		if (currentNode->left != nullptr)
+		{
+			deletionQueue.push(currentNode->left);
+		}
+		if (currentNode->right != nullptr)
+		{
+			deletionQueue.push(currentNode->right);
+		}
+		deletionQueue.pop();
+		delete currentNode->moviedetails;
+		delete currentNode;
+		if (!deletionQueue.empty())
+		{
+			currentNode = deletionQueue.front();
+		}
+	}
 }
 
 void Store::addstorecustomers(ifstream& customerinfile)
@@ -667,6 +725,10 @@ bool Store::performHistoryCommand(std::string command)
 		if (pair.first == customerId)
 		{
 			transaction* currentTransaction = pair.second->gettransactionhead();
+			if (currentTransaction != nullptr)
+			{
+				cout << "customer# " << customerId << " history: ";
+			}
 			while (currentTransaction != nullptr)
 			{
 				cout << currentTransaction->gettransactiontype();

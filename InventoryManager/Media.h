@@ -35,7 +35,7 @@ public:
 	// ------------------------------------~Media-----------------------------------------------
 	// Description: destructor, destroys dynamically allocated Media object
 	// ---------------------------------------------------------------------------------------------------
-	~Media();
+	virtual ~Media();
 
 	// ------------------------------------setReleaseDate-----------------------------------------------
 	// Description: setter for release date
