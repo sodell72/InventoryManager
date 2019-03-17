@@ -50,10 +50,11 @@ bool DramaMovie::operator<(const DramaMovie & other) const
 
 std::ostream & operator<<(std::ostream & out, const DramaMovie & dramaMovie)
 {
-	out << "GENRE: Drama" << " ";
-	out << "TITLE: " << dramaMovie.getTitle() << " ";
-	out << "RELEASE DATE: " << dramaMovie.getReleaseDate() << " ";
-	out << "DISTRIBUTION TYPE: " << dramaMovie.getDistributionType() << " ";
-	out << "DIRECTOR: " << dramaMovie.getDirector() << std::endl;
+	out << "Drama" << " ";
+	out << dramaMovie.getDirector() << "  ";
+	out << dramaMovie.getTitle() << " ";
+	//out << "RELEASE DATE: " << dramaMovie.getReleaseDate() << " ";
+	//out << "DISTRIBUTION TYPE: " << dramaMovie.getDistributionType() << " ";
+
 	return out;
 }

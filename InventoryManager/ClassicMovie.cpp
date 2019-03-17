@@ -115,11 +115,11 @@ bool ClassicMovie::operator<(const ClassicMovie & other) const
 
 std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
 {
-	out << "GENRE: classic" << " ";
-	out << "TITLE: " << classicMovie.getTitle() << " ";
-	out << "RELEASE DATE: " << classicMovie.getReleaseDate() << " ";
-	out << "DISTRIBUTION TYPE: " << classicMovie.getDistributionType() << " ";
-	out << "DIRECTOR: " << classicMovie.getDirector() << " ";
-	out << "MAJOR ACTOR NAME: " << classicMovie.getMajorActorName() << std::endl;
+	out << "Classic" << " ";
+	//out << "TITLE: " << classicMovie.getTitle() << " ";
+	out << classicMovie.getReleaseDate() << " ";
+	//out << "DISTRIBUTION TYPE: " << classicMovie.getDistributionType() << " ";
+	//out << "DIRECTOR: " << classicMovie.getDirector() << " ";
+	out << classicMovie.getMajorActorName();
 	return out;
 }

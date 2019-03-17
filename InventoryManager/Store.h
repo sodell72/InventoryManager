@@ -24,9 +24,7 @@ class Store
 public:
 	Store();
 	~Store();
-
-
-	bool performCommand(std::string command);
+	void executestorecommands(ifstream& infileCommands);
 	void addstorecustomers(ifstream& customerinfile);
 	void addstoremovies(ifstream& movieinfile);
 	void displaycustomers();  //test method for testing
@@ -71,10 +69,12 @@ private:
 	Customer* fetchcustomerobject(int customerid);
 	bool validateifcustomerborrowedtheitem(Customer* cust,Movie* moviereturn);
 
+
 	bool performBorrowCommand(string command);
 	bool performReturnCommand(string command);
 	bool performInventoryCommand(string command);
 	bool performHistoryCommand(string command);
+	bool performCommand(std::string command);
 
 	void displaystorestree(movienode* head);
 	void comedymoviehash(string moviedetails);

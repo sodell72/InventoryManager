@@ -197,9 +197,9 @@ void Store::insertcomedyhashtable(string moviedetails, ComedyMovie *comedymovie)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
 
-	cout<<"Hashkey Parameter :"<<(vec[1]+vec[2])<<endl;
+	//cout<<"Hashkey Parameter :"<<(vec[1]+vec[2])<<endl;
 	int hashkey = hashfunction(vec[1]+vec[2]);
-	cout<<"Hashkey :"<<hashkey<<endl;
+	//cout<<"Hashkey :"<<hashkey<<endl;
 
 	if (this->comedyhash[hashkey] == NULL)
 	{
@@ -226,9 +226,9 @@ void Store::insertdramahashtable(string moviedetails, DramaMovie* dramamovie)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
 
-	cout<<"hashkeyparameter: "<<(vec[0]+vec[1])<<endl;
+	//cout<<"hashkeyparameter: "<<(vec[0]+vec[1])<<endl;
 	int hashkey = hashfunction(vec[0]+vec[1]);
-	cout<<"Hashkey :"<<hashkey<<endl;
+	//cout<<"Hashkey :"<<hashkey<<endl;
 
 	if (this->dramahash[hashkey] == NULL)
 	{
@@ -255,9 +255,9 @@ void Store::insertclassichashtable(string moviedetails, ClassicMovie* classicmov
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
 
-	cout<<"hashkeyparameter: "<<vec[2]<<endl;
+	//cout<<"hashkeyparameter: "<<vec[2]<<endl;
 	int hashkey = hashfunction(vec[2]);
-	cout<<"hashkey :"<<hashkey<<endl;
+	//cout<<"hashkey :"<<hashkey<<endl;
 
 	if (this->classichash[hashkey] == NULL)
 	{
@@ -316,13 +316,13 @@ void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininven
 		(*(static_cast<ComedyMovie*>(mnode->moviedetails)) == *(static_cast<ComedyMovie*>(movieininventory))) &&
 		mnode != NULL )
 	{
-		cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
+		//cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
 		if ((mnode->inventorycount + value) >=  0)
 			mnode->inventorycount = mnode->inventorycount + value;
 		else
 		{
 			mnode->inventorycount = 0;
-			cout<<"You cannot borrow "<<*(static_cast<ComedyMovie*>(mnode->moviedetails))<<"as stock is zero"<<endl;
+			cout<<"You cannot borrow as stock is zero"<<*(static_cast<ComedyMovie*>(mnode->moviedetails))<<endl;
 		}
 
 		return;
@@ -331,7 +331,7 @@ void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininven
 		(*(static_cast<DramaMovie*>(mnode->moviedetails)) == *(static_cast<DramaMovie*>(movieininventory))) &&
 		mnode != NULL)
 	{
-		cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
+		//cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
 		if (mnode->inventorycount + value >=  0)
 			mnode->inventorycount = mnode->inventorycount + value;
 		else
@@ -345,7 +345,7 @@ void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininven
 			(*(static_cast<ClassicMovie*>(mnode->moviedetails)) == *(static_cast<ClassicMovie*>(movieininventory))) &&
 			mnode != NULL )
 	{
-		cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
+		//cout<<"New inventory count : "<<(mnode->inventorycount + value)<<endl;
 		if (mnode->inventorycount + value >=  0)
 			mnode->inventorycount = mnode->inventorycount + value;
 		else
@@ -378,20 +378,20 @@ void Store::displaystorestree(movienode* head)
 	{
 	case 'F':
 		{
-			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
-			cout << *(static_cast<ComedyMovie*>(head->moviedetails));
+			cout << "Stock Count : " << head->inventorycount << " ";
+			cout << *(static_cast<ComedyMovie*>(head->moviedetails))<<endl;
 			break;
 		}
 	case 'C':
 		{
-			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
-			cout << *(static_cast<ClassicMovie*>(head->moviedetails));
+			cout << "Stock Count : " << head->inventorycount << " ";
+			cout << *(static_cast<ClassicMovie*>(head->moviedetails))<<endl;
 			break;
 		}
 	case 'D':
 		{
-			cout << "INVENTORY COUNT : " << head->inventorycount << " ";
-			cout << *(static_cast<DramaMovie*>(head->moviedetails));
+			cout << "Stock Count : " << head->inventorycount << " ";
+			cout << *(static_cast<DramaMovie*>(head->moviedetails))<<endl;
 			break;
 		}
 	}
@@ -496,10 +496,12 @@ bool Store::performCommand(std::string command)
 		break;
 	case 'H': return performHistoryCommand(command);
 	default:
-		cout << "command: \"" << command << "\" is invalid";
-		return false;
+		{
+			cout << "command: \"" << command << "\" is invalid"<<endl;
+			return false;
+		}
 	}
-	return false;
+	return true;
 }
 
 bool Store::validateMovieCode(char videoCode)
@@ -541,9 +543,9 @@ Customer* Store::fetchcustomerobject(int customerid)
 
 bool Store::performBorrowCommand(std::string command)
 {
-	cout <<"inside borrow"<< endl;
+	//cout <<"inside borrow"<< endl;
 	vector<string> vec = parsecommanddetails(command);
-	cout <<"After Parse command"<<endl;
+	//cout <<"After Parse command"<<endl;
 	string moviecode = vec[3];
 	Movie* movieborrow;
 	string moviedetails;
@@ -561,7 +563,7 @@ bool Store::performBorrowCommand(std::string command)
 	ss >> customerid;
 	if (!validateCustomerId(customerid))
 	{
-		cout<<"invalid Customer Id : "<<moviecode<<endl;
+		cout<<"invalid Customer Id : "<<customerid<<endl;
 		return false;
 	}
 
@@ -585,7 +587,7 @@ bool Store::performBorrowCommand(std::string command)
 
 	if (movieborrow == NULL)
 	{
-		cout<<"You cannot borrow of "<<moviedetails<<" as it is not in store"<<endl;
+		cout<<"You cannot borrow "<<moviedetails<<" as it is not in store"<<endl;
 		return false;
 	}
 
@@ -597,7 +599,7 @@ bool Store::performBorrowCommand(std::string command)
 
 	//Create a new transaction
 	transaction* T = new transaction("B",movieborrow);
-	cout <<"Transaction Type "<<T->gettransactiontype()<<endl;
+
 	//add transaction to the customer
 	cust->addtransaction(T);
 
@@ -606,7 +608,7 @@ bool Store::performBorrowCommand(std::string command)
 
 bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
 {
-	cout<<"inside validate transactions"<<endl;
+	//cout<<"inside validate transactions"<<endl;
 
 	transaction* cur = cust->gettransactionhead();
 
@@ -615,19 +617,16 @@ bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
 
 	while (cur != NULL)
 	{
-		cout<<"inside validate transactions linkedlist loop"<<endl;
-
-		string transactiontype = cur->gettransactiontype();
-		cout<<"Transaction Type "<<transactiontype<<endl;
+		//cout<<"inside validate transactions linkedlist loop"<<endl;
 
 		if (cur->gettransactiontype() == "B" && cur->getmovie() == movie)
 			borrowcount++;
 		else if (cur->gettransactiontype() == "R" && cur->getmovie() == movie)
 			returncount++;
 
-		cout<<"end of loop iteration"<<endl;
-		cout<<"Borrow Count : "<<borrowcount<<endl;
-		cout<<"return Count : "<<returncount<<endl;
+		//cout<<"end of loop iteration"<<endl;
+		//cout<<"Borrow Count : "<<borrowcount<<endl;
+		//cout<<"return Count : "<<returncount<<endl;
 		cur=cur->getnext();
 	}
 
@@ -641,9 +640,9 @@ bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
 
 bool Store::performReturnCommand(std::string command)
 {
-	cout <<"inside return"<< endl;
+	//cout <<"inside return"<< endl;
 	vector<string> vec = parsecommanddetails(command);
-	cout <<"After Parse command"<<endl;
+	//cout <<"After Parse command"<<endl;
 	string moviecode = vec[3];
 	Movie* moviereturn;
 	string moviedetails;
@@ -661,7 +660,7 @@ bool Store::performReturnCommand(std::string command)
 	ss >> customerid;
 	if (!validateCustomerId(customerid))
 	{
-		cout<<"invalid Customer Id : "<<moviecode<<endl;
+		cout<<"invalid Customer Id : "<<customerid<<endl;
 		return false;
 	}
 
@@ -703,7 +702,6 @@ bool Store::performReturnCommand(std::string command)
 
 	//Create a new transaction
 	transaction* T = new transaction("R",moviereturn);
-	cout <<"Transaction Type "<<T->gettransactiontype()<<endl;
 
 	//add transaction to the customer
 	cust->addtransaction(T);
@@ -805,21 +803,21 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 
 	hashkey = hashfunction(moviedetails);
 
-	cout<<"Hashkey :"<<hashkey<<" Movie Details: "<<moviedetails<<endl;
+	//cout<<"Hashkey :"<<hashkey<<" Movie Details: "<<moviedetails<<endl;
 
 	if (moviecode == 'F')
 	{
 			if (this->comedyhash[hashkey] == NULL)
 				return NULL;
 
-			cout<<*this->comedyhash[hashkey]<<endl;
+			//cout<<*this->comedyhash[hashkey]<<endl;
 			ComedyMovie* cur = this->comedyhash[hashkey];
 			int hashcounter = 1; //counter for linear probing
 
 			while(cur != NULL)
 			{
-				cout<<"Hash Comparisons : "<<trim(cur->getTitle())+trim(cur->getReleaseDate());
-				cout<<"   "<<moviedetails<<endl;
+				//cout<<"Hash Comparisons : "<<trim(cur->getTitle())+trim(cur->getReleaseDate());
+				//cout<<"   "<<moviedetails<<endl;
 				if (trim(cur->getTitle())+trim(cur->getReleaseDate()) == moviedetails)
 					return cur;
 
@@ -838,8 +836,8 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 
 			while(cur != NULL)
 			{
-				cout<<"Hash Comparisons : "<<trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate());
-				cout<<"   "<<moviedetails<<endl;
+				//cout<<"Hash Comparisons : "<<trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate());
+				//cout<<"   "<<moviedetails<<endl;
 				if (trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate()) == moviedetails)
 					return cur;
 
@@ -859,8 +857,8 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 
 		while(cur != NULL)
 		{
-			cout<<"Hash Comparisons : "<<trim(cur->getDirector())+trim(cur->getTitle());
-			cout<<"   "<<moviedetails<<endl;
+			//cout<<"Hash Comparisons : "<<trim(cur->getDirector())+trim(cur->getTitle());
+			//cout<<"   "<<moviedetails<<endl;
 			if (trim(cur->getDirector())+trim(cur->getTitle()) == moviedetails)
 				return cur;
 
@@ -898,5 +896,18 @@ std::string Store::trim(const std::string& input)
 	while (front < back && isspace(input[front])) front++;
 	while (front < back && isspace(input[back])) back--;
 	return std::string(input, front, back + 1);
+}
+
+void Store::executestorecommands(ifstream& infileCommands)
+{
+	string command;
+	for (;;)
+	{
+		if (infileCommands.eof())
+			break;
+
+		getline(infileCommands,command);
+		performCommand(command);
+	}
 }
 

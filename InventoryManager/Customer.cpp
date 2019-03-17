@@ -88,26 +88,17 @@ transaction* Customer::gettransactionhead()
 
 void Customer::addtransaction(transaction* T)
 {
-	cout<<"Inside add transaction"<<endl;
+	//cout<<"Inside add transaction"<<endl;
 
 	if (this->gettransactionhead()== NULL)
 	{
 		this->settransactionhead(T);
-		cout<<this->gettransactionhead()->gettransactiontype()<<endl;
 		return;
 	}
 
 	transaction* temp = this->gettransactionhead();
 	this->settransactionhead(T);
 	T->setnext(temp);
-
-
-	cout<<"Next Transaction Type"<<endl;
-	cout<<this->gettransactionhead()->getnext()->gettransactiontype()<<endl;
-	cout<<this->gettransactionhead()->getnext()<<endl;
-	cout<<"Head Transaction Type"<<endl;
-	cout<<this->gettransactionhead()->gettransactiontype()<<endl;
-	cout<<this->gettransactionhead()<<endl;
 
 }
 
