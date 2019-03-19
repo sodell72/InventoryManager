@@ -15,7 +15,7 @@
 #define CUSTOMER_H_
 #pragma once
 #include <string>
-#include "transaction.h"
+#include "Transaction.h"
 using namespace std;
 
 class Customer
