@@ -1,5 +1,8 @@
 #include "Store.h"
 
+// ------------------------------------Store-----------------------------------------------
+// Description: constructor, initializes values to null
+// ---------------------------------------------------------------------------------------------------
 Store::Store()
 {
 	this->comedymoviehead = NULL;
@@ -14,6 +17,10 @@ Store::Store()
 	}
 }
 
+// ------------------------------------~Store-----------------------------------------------
+// Description: destructor, destroys dynamically allocated Store object, deletes all dynamically allocated
+// objects contained within the Store object too (Transaction, Movie, Customer)
+// ---------------------------------------------------------------------------------------------------
 Store::~Store()
 {
 	std::cout << "DESTRUCTOR CALLED" << endl;
@@ -76,6 +83,9 @@ void Store::deleteSubTree(movienode * subTreeTop)
 	}
 }
 
+// ------------------------------------addstorecustomers-----------------------------------------------
+// Description: takes customer file parses it and creates appropriate customer objects
+// ---------------------------------------------------------------------------------------------------
 void Store::addstorecustomers(ifstream& customerinfile)
 {
 	int customerid;
@@ -95,6 +105,9 @@ void Store::addstorecustomers(ifstream& customerinfile)
 	}
 }
 
+// ------------------------------------displaycustomers-----------------------------------------------
+// Description: dispays customers
+// ---------------------------------------------------------------------------------------------------
 void Store::displaycustomers()
 {
 	for (int i = 0; i < (int)this->storecustomers.size();i++)
@@ -105,6 +118,10 @@ void Store::displaycustomers()
 	}
 }
 
+// ------------------------------------addstoremovies-----------------------------------------------
+// Description: takes movie file parses it and creates appropriate movie files and initializes inventory counts
+// places movienodes in correct location in the correct sorted tree
+// ---------------------------------------------------------------------------------------------------
 void Store::addstoremovies(ifstream& movieinfile)
 {
 	string moviecode;
@@ -279,6 +296,9 @@ void Store::insertclassichashtable(string moviedetails, ClassicMovie* classicmov
 	return;
 }
 
+// ------------------------------------displaystoremovies-----------------------------------------------
+// Description: dispays movies contained in store
+// ---------------------------------------------------------------------------------------------------
 void Store::displaystoremovies()
 {
 	displaystorestree(this->comedymoviehead);
@@ -286,6 +306,9 @@ void Store::displaystoremovies()
 	displaystorestree(this->classicmoviehead);
 }
 
+// ------------------------------------updateinventorycounts-----------------------------------------------
+// Description: updates given movie's inventory count, passes functionality on to recursiveupdate function
+// ---------------------------------------------------------------------------------------------------
 bool Store::updateinventorycounts(char moviecode,Movie* movieininventory,int value)
 {
 	switch (moviecode)
@@ -310,6 +333,9 @@ bool Store::updateinventorycounts(char moviecode,Movie* movieininventory,int val
 	return false;
 }
 
+// ------------------------------------recursiveupdate-----------------------------------------------
+// Description: updates given movie's inventory count
+// ---------------------------------------------------------------------------------------------------
 void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininventory,int value)
 {
 	if (moviecode == 'F' &&
@@ -366,8 +392,9 @@ void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininven
 	return;
 }
 
-
-
+// ------------------------------------displaystorestree-----------------------------------------------
+// Description: hashes movie object
+// ---------------------------------------------------------------------------------------------------
 void Store::displaystorestree(movienode* head)
 {
 	if (head == NULL)
@@ -481,7 +508,9 @@ void Store::addtotree(movienode* &root, movienode* &m)
 
 }
 
-
+// ------------------------------------performCommand-----------------------------------------------
+// Description: takes command and passes it on the the correct perform***command function
+// ---------------------------------------------------------------------------------------------------
 bool Store::performCommand(std::string command)
 {
 	char commandType = command[0];
@@ -504,6 +533,9 @@ bool Store::performCommand(std::string command)
 	return true;
 }
 
+// ------------------------------------validateMovieCode-----------------------------------------------
+// Description: validates movie code is one of approved movie codes
+// ---------------------------------------------------------------------------------------------------
 bool Store::validateMovieCode(char videoCode)
 {
 	videoCode = std::toupper(videoCode);
@@ -514,11 +546,17 @@ bool Store::validateMovieCode(char videoCode)
 	return false;
 }
 
+// ------------------------------------validateActionCode-----------------------------------------------
+// Description: validates action code is one of approved action codes
+// ---------------------------------------------------------------------------------------------------
 bool Store::validateActionCode(char actionCode)
 {
 	return false;
 }
 
+// ------------------------------------validateCustomerId-----------------------------------------------
+// Description: validates customer id associated with command is a valid customer
+// ---------------------------------------------------------------------------------------------------
 bool Store::validateCustomerId(int id)
 {
 	for (int i = 0; i < (int)this->storecustomers.size();i++)
@@ -540,7 +578,9 @@ Customer* Store::fetchcustomerobject(int customerid)
 	return NULL;
 }
 
-
+// ------------------------------------performBorrowCommand-----------------------------------------------
+// Description: performs borrow command.  updates inventory and customer transactions
+// ---------------------------------------------------------------------------------------------------
 bool Store::performBorrowCommand(std::string command)
 {
 	//cout <<"inside borrow"<< endl;
@@ -639,6 +679,9 @@ bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
 	return false;
 }
 
+// ------------------------------------performReturnCommand-----------------------------------------------
+// Description: performs return command.  updates inventory and customer transactions
+// ---------------------------------------------------------------------------------------------------
 bool Store::performReturnCommand(std::string command)
 {
 	//cout <<"inside return"<< endl;
@@ -711,12 +754,18 @@ bool Store::performReturnCommand(std::string command)
 	return true;
 }
 
+// ------------------------------------performInventoryCommand-----------------------------------------------
+// Description: displays inventory
+// ---------------------------------------------------------------------------------------------------
 bool Store::performInventoryCommand(std::string command)
 {
 	displaystoremovies();
 	return true;
 }
 
+// ------------------------------------performHistoryCommand-----------------------------------------------
+// Description: displays given customer's transaction history
+// ---------------------------------------------------------------------------------------------------
 bool Store::performHistoryCommand(std::string command)
 {
 	int customerId = stoi(command.substr(2));
@@ -895,7 +944,9 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 
 }
 
-
+// ------------------------------------hashfunction-----------------------------------------------
+// Description: hashes movie object
+// ---------------------------------------------------------------------------------------------------
 int Store::hashfunction(string moviedetails)
 {
 	int sum = 0;
@@ -908,6 +959,9 @@ int Store::hashfunction(string moviedetails)
 	return (sum%ARRAYMAX);
 }
 
+// ------------------------------------trim-----------------------------------------------
+// Description: trims whitespace
+// ---------------------------------------------------------------------------------------------------
 std::string Store::trim(const std::string& input)
 {
 	if (input.empty()) return ""; // return empty string if all spaces
@@ -920,6 +974,9 @@ std::string Store::trim(const std::string& input)
 	return std::string(input, front, back + 1);
 }
 
+// ------------------------------------executestorecommands-----------------------------------------------
+// Description: takes commands file parses it and passes it to the execute command function
+// ---------------------------------------------------------------------------------------------------
 void Store::executestorecommands(ifstream& infileCommands)
 {
 	string command;
