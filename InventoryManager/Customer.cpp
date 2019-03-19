@@ -5,7 +5,7 @@
  *  Created on: Mar 9, 2019
  *      Author: vismohan
  */
-#include "customer.h"
+#include "Customer.h"
 
 //------------------------------------Customer--------------------------------------------------
 // Description: Customer constructor, initializes the customer with first name, last name and ID
