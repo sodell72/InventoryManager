@@ -23,9 +23,10 @@ Store::Store()
 // ---------------------------------------------------------------------------------------------------
 Store::~Store()
 {
-	std::cout << "DESTRUCTOR CALLED" << endl;
-	movienode* heads[3]  = {this->comedymoviehead, this->dramamoviehead, this->classicmoviehead};
-	// deletes node and associated movie
+	//std::cout << "DESTRUCTOR CALLED" << endl;
+
+	// deletes nodes in all trees associated with the array of  heads
+	movienode* heads[3] = { this->comedymoviehead, this->dramamoviehead, this->classicmoviehead };
 	for (movienode* headPtr : heads)
 	{
 		deleteSubTree(headPtr);
@@ -33,6 +34,24 @@ Store::~Store()
 	this->comedymoviehead = nullptr;
 	this->dramamoviehead = nullptr;
 	this->classicmoviehead = nullptr;
+
+	// deletes ComedyMovies
+	for (ComedyMovie* movie : this->comedyhash)
+	{
+		delete movie;
+	}
+
+	// deletes DramaMovies
+	for (DramaMovie* movie : this->dramahash)
+	{
+		delete movie;
+	}
+
+	// deletes ClassicMovies
+	for (ClassicMovie* movie : this->classichash)
+	{
+		delete movie;
+	}
 
 	// deletes transactions and customers
 	for (pair<int, Customer*> pair : this->storecustomers)
@@ -49,9 +68,7 @@ Store::~Store()
 
 		// deletes customers
 		delete pair.second;
-
 	}
-	// do I need to do anything with hash arrays?
 }
 
 // ------------------------------------deleteSubTree-----------------------------------------------
@@ -74,7 +91,7 @@ void Store::deleteSubTree(movienode * subTreeTop)
 			deletionQueue.push(currentNode->right);
 		}
 		deletionQueue.pop();
-		delete currentNode->moviedetails;
+		//delete currentNode->moviedetails;
 		delete currentNode;
 		if (!deletionQueue.empty())
 		{
