@@ -47,8 +47,6 @@ string& transaction::gettransactiontype()
 	return this->transactiontype;
 }
 
-
-
 //------------------------------------settransactiondate----------------------------------------
 // Description: getter for transaction next transaction from the transaction list
 //----------------------------------------------------------------------------------------------
@@ -65,13 +63,7 @@ Movie* transaction::getmovie()
 	return this->m;
 }
 
-
 char transaction::getmoviecode()
 {
 	return this->moviecode;
 }
-
-
-
-
-

@@ -1,5 +1,8 @@
 #include "ClassicMovie.h"
 
+// ------------------------------------ClassicMovie-----------------------------------------------
+// Description: constructor, initializes values based on movie info
+// ---------------------------------------------------------------------------------------------------
 ClassicMovie::ClassicMovie(std::string classicMovieData) : Movie()
 {
 	std::vector<std::string> vec;
@@ -38,50 +41,80 @@ ClassicMovie::ClassicMovie(std::string classicMovieData) : Movie()
 	this->setReleaseDate(this->getReleaseMonth() + " " + this->getReleaseYear());
 }
 
+// ------------------------------------~ClassicMovie-----------------------------------------------
+// Description: destructor, destroys dynamically allocated ClassicMovie object
+// ---------------------------------------------------------------------------------------------------
 ClassicMovie::~ClassicMovie()
 {
 }
 
+// ------------------------------------setMajorActorName-----------------------------------------------
+// Description: setter for majorActorName
+// ---------------------------------------------------------------------------------------------------
 void ClassicMovie::setMajorActorName(std::string majorActorName)
 {
 	this->majorActorName = majorActorName;
 }
 
+// ------------------------------------setReleaseMonth-----------------------------------------------
+// Description: setter for releaseMonth
+// ---------------------------------------------------------------------------------------------------
 void ClassicMovie::setReleaseMonth(std::string releaseMonth)
 {
 	this->releaseMonth = releaseMonth;
 }
 
+// ------------------------------------setReleaseYear-----------------------------------------------
+// Description: setter for releaseYear
+// ---------------------------------------------------------------------------------------------------
 void ClassicMovie::setReleaseYear(std::string releaseYear)
 {
 	this->releaseYear = releaseYear;
 }
 
+// ------------------------------------getMajorActorName-----------------------------------------------
+// Description: getter for majorActorName
+// ---------------------------------------------------------------------------------------------------
 std::string ClassicMovie::getMajorActorName() const
 {
 	return this->majorActorName;
 }
 
+// ------------------------------------getReleaseMonth-----------------------------------------------
+// Description: getter for releaseMonth
+// ---------------------------------------------------------------------------------------------------
 std::string ClassicMovie::getReleaseMonth() const
 {
 	return this->releaseMonth;
 }
 
+// ------------------------------------getReleaseYear-----------------------------------------------
+// Description: getter for releaseYear
+// ---------------------------------------------------------------------------------------------------
 std::string ClassicMovie::getReleaseYear() const
 {
 	return this->releaseYear;
 }
 
+// ------------------------------------setReleaseDate-----------------------------------------------
+// Description: setter for release date, also sets release month and release year
+// ---------------------------------------------------------------------------------------------------
 std::string ClassicMovie::getReleaseDate() const
 {
 	return this->getReleaseMonth() + " " + this->getReleaseYear();
 }
 
+// ------------------------------------setReleaseDate-----------------------------------------------
+// Description: setter for release date, also sets release month and release year
+// ---------------------------------------------------------------------------------------------------
 void ClassicMovie::setReleaseDate(std::string releaseDate)
 {
 	this->releaseDate = releaseDate;
 }
 
+// ------------------------------------==-----------------------------------------------
+// Description: performs equality comparison
+// ---------------------------------------------------------------------------------------------------
 bool ClassicMovie::operator==(const ClassicMovie & other) const
 {
 	if (this == &other)
@@ -98,6 +131,9 @@ bool ClassicMovie::operator==(const ClassicMovie & other) const
 	return false;
 }
 
+// ------------------------------------<-----------------------------------------------
+// Description: performs less than comparison
+// ---------------------------------------------------------------------------------------------------
 bool ClassicMovie::operator<(const ClassicMovie & other) const
 {
 	if (this->getReleaseDate() == other.getReleaseDate())
@@ -112,7 +148,9 @@ bool ClassicMovie::operator<(const ClassicMovie & other) const
 	return std::stoi(this->getReleaseYear()) < std::stoi(other.getReleaseYear());
 }
 
-
+// ------------------------------------<<-----------------------------------------------
+// Description: performs << overload to print to console
+// ---------------------------------------------------------------------------------------------------
 std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
 {
 	out << "Classic" << " ";

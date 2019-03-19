@@ -13,6 +13,10 @@
 
 class ClassicMovie : public Movie
 {
+
+	// ------------------------------------<<-----------------------------------------------
+	// Description: performs << overload to print to console
+	// ---------------------------------------------------------------------------------------------------
 	friend std::ostream & operator<<(std::ostream & out, const ClassicMovie& classicMovie);
 
 private:
@@ -82,10 +86,4 @@ public:
 	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const ClassicMovie& other) const;
-
-	// ------------------------------------hash-----------------------------------------------
-	// Description: hashing function, takes in object ID and outputs index
-	// ---------------------------------------------------------------------------------------------------
-	//virtual int hash(int ID);
-
 };

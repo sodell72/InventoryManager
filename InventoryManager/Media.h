@@ -67,11 +67,9 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	virtual char getDistributionType() const;
 
-	// ------------------------------------hash-----------------------------------------------
-	// Description: hashing function, takes in object ID and outputs index
+	// ------------------------------------trim-----------------------------------------------
+	// Description: trims whitespace
 	// ---------------------------------------------------------------------------------------------------
-	//virtual int hash(int ID);
-
 	std::string trim(const std::string& input);
 
 };

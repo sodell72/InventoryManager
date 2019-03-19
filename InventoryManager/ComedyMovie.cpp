@@ -1,5 +1,8 @@
 #include "ComedyMovie.h"
 
+// ------------------------------------CommedyMovie-----------------------------------------------
+// Description: constructor, initializes values based on movie info
+// ---------------------------------------------------------------------------------------------------
 ComedyMovie::ComedyMovie(std::string comedyMovieData) : Movie()
 {
 	std::vector<std::string> vec;
@@ -20,10 +23,16 @@ ComedyMovie::ComedyMovie(std::string comedyMovieData) : Movie()
 	this->setReleaseDate(vec[2]);
 }
 
+// ------------------------------------~CommedyMovie-----------------------------------------------
+// Description: destructor, destroys dynamically allocated ComedyMovie object
+// ---------------------------------------------------------------------------------------------------
 ComedyMovie::~ComedyMovie()
 {
 }
 
+// ------------------------------------==-----------------------------------------------
+// Description: performs equality comparison
+// ---------------------------------------------------------------------------------------------------
 bool ComedyMovie::operator==(const ComedyMovie & other) const
 {
 	if (this == &other)
@@ -34,6 +43,9 @@ bool ComedyMovie::operator==(const ComedyMovie & other) const
 	    return false;
 }
 
+// ------------------------------------<-----------------------------------------------
+// Description: performs less than comparison
+// ---------------------------------------------------------------------------------------------------
 bool ComedyMovie::operator<(const ComedyMovie & other) const
 {
 	if (this->getTitle() == other.getTitle())
@@ -43,6 +55,9 @@ bool ComedyMovie::operator<(const ComedyMovie & other) const
 	return this->getTitle() < other.getTitle();
 }
 
+// ------------------------------------<<-----------------------------------------------
+// Description: performs << overload to print to console
+// ---------------------------------------------------------------------------------------------------
 std::ostream & operator<<(std::ostream & out, const ComedyMovie & comedyMovie)
 {
 	out << "Comedy" << " ";

@@ -77,7 +77,6 @@ string Customer::getfirstname()
 	return this->firstname;
 }
 
-
 //------------------------------------gettransactionhead----------------------------------------------
 // Description: getter for transaction head
 //----------------------------------------------------------------------------------------------
@@ -86,6 +85,9 @@ transaction* Customer::gettransactionhead()
 	return this->head;
 }
 
+//------------------------------------AddTransactiontoaCustomer----------------------------------
+// Description: add transaction to the customer
+//-----------------------------------------------------------------------------------------------
 void Customer::addtransaction(transaction* T)
 {
 	//cout<<"Inside add transaction"<<endl;
