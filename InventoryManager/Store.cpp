@@ -106,7 +106,7 @@ void Store::addstorecustomers(ifstream& customerinfile)
 }
 
 // ------------------------------------displaycustomers-----------------------------------------------
-// Description: dispays customers
+// Description: displays customers
 // ---------------------------------------------------------------------------------------------------
 void Store::displaycustomers()
 {
@@ -210,7 +210,12 @@ void Store::addstoremovies(ifstream& movieinfile)
 	}
 }
 
-void Store::insertcomedyhashtable(string moviedetails, ComedyMovie *comedymovie)
+// ------------------------------------insertcomedyhashtable-------------------------------------------
+// Description: inserts a comedy movie pointers into the comedy hash list. The method uses linear
+// probing in case of collisions
+// ---------------------------------------------------------------------------------------------------
+
+void Store::insertcomedyhashtable(string moviedetails, ComedyMovie* comedymovie)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
 
@@ -239,6 +244,11 @@ void Store::insertcomedyhashtable(string moviedetails, ComedyMovie *comedymovie)
 
 }
 
+// ------------------------------------insertdramahashtable-------------------------------------------
+// Description: inserts a drama movie pointers into the drama hash list. The method uses linear
+// probing in case of collisions
+//------------------------------------------------------------------------------------------------------
+
 void Store::insertdramahashtable(string moviedetails, DramaMovie* dramamovie)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
@@ -266,6 +276,11 @@ void Store::insertdramahashtable(string moviedetails, DramaMovie* dramamovie)
 
 	return;
 }
+
+// ------------------------------------insertclassichashtable-------------------------------------------
+// Description: inserts a classic movie pointers into the classic hash list. The method uses linear
+// probing in case of collisions
+//------------------------------------------------------------------------------------------------------
 
 
 void Store::insertclassichashtable(string moviedetails, ClassicMovie* classicmovie)
@@ -308,6 +323,7 @@ void Store::displaystoremovies()
 
 // ------------------------------------updateinventorycounts-----------------------------------------------
 // Description: updates given movie's inventory count, passes functionality on to recursiveupdate function
+// this function is called for both Borrow, return and while initializing the inventory counts
 // ---------------------------------------------------------------------------------------------------
 bool Store::updateinventorycounts(char moviecode,Movie* movieininventory,int value)
 {
@@ -334,7 +350,7 @@ bool Store::updateinventorycounts(char moviecode,Movie* movieininventory,int val
 }
 
 // ------------------------------------recursiveupdate-----------------------------------------------
-// Description: updates given movie's inventory count
+// Description: updates given movie's inventory count.
 // ---------------------------------------------------------------------------------------------------
 void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininventory,int value)
 {
@@ -393,7 +409,8 @@ void Store::recursiveupdate(char moviecode, movienode* mnode,Movie* movieininven
 }
 
 // ------------------------------------displaystorestree-----------------------------------------------
-// Description: hashes movie object
+// Description: displays movie objects stored in the movie tree. It determines between ComedyMovie tree
+// drama movie tree and classic movie tree based on the head node passed to the function
 // ---------------------------------------------------------------------------------------------------
 void Store::displaystorestree(movienode* head)
 {
@@ -427,6 +444,11 @@ void Store::displaystorestree(movienode* head)
 
 	return;
 }
+
+// ------------------------------------addtotree------------------------------------------------
+// Description: add movie nodes to the tree. It determines the tree to add the movie object based
+// on the root node that is passed as input
+//----------------------------------------------------------------------------------------------
 
 void Store::addtotree(movienode* &root, movienode* &m)
 {
@@ -510,6 +532,7 @@ void Store::addtotree(movienode* &root, movienode* &m)
 
 // ------------------------------------performCommand-----------------------------------------------
 // Description: takes command and passes it on the the correct perform***command function
+// incase of invalid commands it throws an error message
 // ---------------------------------------------------------------------------------------------------
 bool Store::performCommand(std::string command)
 {
@@ -568,6 +591,10 @@ bool Store::validateCustomerId(int id)
 	return false;
 }
 
+//------------------------------------fetchcustomerobject-----------------------------------------------
+// Description: helper function to return the customer object pointer given a customer id
+// ---------------------------------------------------------------------------------------------------
+
 Customer* Store::fetchcustomerobject(int customerid)
 {
 	for (pair<int, Customer*> pair : storecustomers)
@@ -579,7 +606,8 @@ Customer* Store::fetchcustomerobject(int customerid)
 }
 
 // ------------------------------------performBorrowCommand-----------------------------------------------
-// Description: performs borrow command.  updates inventory and customer transactions
+// Description: performs borrow command.  updates inventory, creates transaction and add the transcation
+// to the customer
 // ---------------------------------------------------------------------------------------------------
 bool Store::performBorrowCommand(std::string command)
 {
@@ -646,6 +674,12 @@ bool Store::performBorrowCommand(std::string command)
 
 	return true;
 }
+
+// ------------------------------------validateifcustomerborrowedtheitem------------------------------
+// Description: helper function being called from performReturn method. It checks if the customer has
+// borrowed the given movie in the first place before supporting the return of the item
+// ---------------------------------------------------------------------------------------------------
+
 
 bool Store::validateifcustomerborrowedtheitem(Customer* cust,Movie* movie)
 {
@@ -813,6 +847,12 @@ bool Store::performHistoryCommand(std::string command)
 	return false;
 }
 
+// ------------------------------------moviefoundininventory-------------------------------------
+// Description: helper function determines of a movie provided in string is present in the store
+// it is being called while adding movies to store to check if it is already present. If present
+// it will update the inventory count instead of adding a new movie
+// ---------------------------------------------------------------------------------------------------
+
 Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
@@ -825,6 +865,12 @@ Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 		return moviefoundinhashtable(moviecode,vec[0]+vec[1]);
 	return NULL;
 }
+
+
+// ------------------------------------parsemoviedetails-------------------------------------
+// Description: helper function to parse movie details from an input string
+// it is used while adding movies to the store
+// ------------------------------------------------------------------------------------------
 
 
 vector<string> Store::parsemoviedetails(string moviedetails)
@@ -845,6 +891,11 @@ vector<string> Store::parsemoviedetails(string moviedetails)
 
 		return vec;
 }
+
+// ------------------------------------parsecommanddetails-------------------------------------
+// Description: helper function to parse command details from an input string
+// it is used while processing the command file
+// ------------------------------------------------------------------------------------------
 
 vector<string> Store::parsecommanddetails(string command)
 {
@@ -867,6 +918,11 @@ vector<string> Store::parsecommanddetails(string command)
 
 		return vec;
 }
+
+//-------------------------------------------------------------------------------------------------
+// Description: Helper function used to check if a given movie is available in the hash table/store
+// this is being used during addition of movie to store, borrowing movie and returning movie
+//-------------------------------------------------------------------------------------------------
 
 Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 {

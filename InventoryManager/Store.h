@@ -74,6 +74,8 @@ private:
 	DramaMovie* dramahash[ARRAYMAX];  // contains hashed list of dramaMovies
 	ClassicMovie* classichash[ARRAYMAX];  // contains hashed list of classicMovies
 
+	//Struct which will hold a movie node added to the store. It is part of the three trees that
+	//will hold the movies in sorted order
 	struct movienode
 	{
 		char movietype;
@@ -83,11 +85,16 @@ private:
 		movienode* right;
 	};
 
+	//Roots of trees that will hold the movies in the sorted order
 	movienode* comedymoviehead;
 	movienode* dramamoviehead;
 	movienode* classicmoviehead;
 
 
+	// ------------------------------------addtotree------------------------------------------------
+	// Description: add movie nodes to the tree. It determines the tree to add the movie object based
+	// on the root node that is passed as input
+	//----------------------------------------------------------------------------------------------
 	void addtotree(movienode* &root, movienode* &m);
 
 	// ------------------------------------validateMovieCode-----------------------------------------------
@@ -105,14 +112,58 @@ private:
 	// ---------------------------------------------------------------------------------------------------
 	bool validateCustomerId(int id);
 
+	// ------------------------------------moviefoundininventory-------------------------------------
+	// Description: helper function determines of a movie provided in string is present in the store
+	// it is being called while adding movies to store to check if it is already present. If present
+	// it will update the inventory count instead of adding a new movie
+	// -------------------------------------------------------------------------------------------------
 	Movie* moviefoundininventory(char moviecode,string moviedetails);
+
+	//-------------------------------------------------------------------------------------------------
+	// Description: Helper function used to check if a given movie is available in the hash table/store
+	// this is being used during addition of movie to store, borrowing movie and returning movie
+	//-------------------------------------------------------------------------------------------------
 	Movie* moviefoundinhashtable(char moviecode, string moviedetails);
+
+	// ------------------------------------insertcomedyhashtable-------------------------------------------
+	// Description: inserts a comedy movie pointers into the comedy hash list. The method uses linear
+	// probing in case of collisions
+	// ---------------------------------------------------------------------------------------------------
 	void insertcomedyhashtable(string moviedetails, ComedyMovie *comedymovie);
+
+	// ------------------------------------insertclassichashtable-------------------------------------------
+	// Description: inserts a classic movie pointers into the classic hash list. The method uses linear
+	// probing in case of collisions
+	//------------------------------------------------------------------------------------------------------
 	void insertclassichashtable(string moviedetails, ClassicMovie* classicmovie);
+
+	// ------------------------------------insertdramahashtable-------------------------------------------
+	// Description: inserts a drama movie pointers into the drama hash list. The method uses linear
+	// probing in case of collisions
+	//------------------------------------------------------------------------------------------------------
 	void insertdramahashtable(string moviedetails, DramaMovie* dramamovie);
+
+	// ------------------------------------parsemoviedetails-------------------------------------
+	// Description: helper function to parse movie details from an input string
+	// it is used while adding movies to the store
+	// ------------------------------------------------------------------------------------------
 	vector<string> parsemoviedetails(string moviedetails);
+
+	// ------------------------------------parsecommanddetails-------------------------------------
+	// Description: helper function to parse command details from an input string
+	// it is used while processing the command file
+	// ------------------------------------------------------------------------------------------
 	vector<string> parsecommanddetails(string command);
+
+	//------------------------------------fetchcustomerobject-----------------------------------------------
+	// Description: helper function to return the customer object pointer given a customer id
+	// ---------------------------------------------------------------------------------------------------
 	Customer* fetchcustomerobject(int customerid);
+
+	// ------------------------------------validateifcustomerborrowedtheitem------------------------------
+	// Description: helper function being called from performReturn method. It checks if the customer has
+	// borrowed the given movie in the first place before supporting the return of the item
+	// ---------------------------------------------------------------------------------------------------
 	bool validateifcustomerborrowedtheitem(Customer* cust,Movie* moviereturn);
 
 	// ------------------------------------performBorrowCommand-----------------------------------------------
