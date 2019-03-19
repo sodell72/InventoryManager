@@ -873,6 +873,10 @@ bool Store::performHistoryCommand(std::string command)
 Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
+	
+	//Depending on the type of movie, checks in the corresponding hash table and if the movie
+	//is present on the unique attributes which are Title and year for comedy movie
+	//Release date and major actor for classic movies and Director and title for Drama Movies
 
 	if (moviecode == 'F')
 		return moviefoundinhashtable(moviecode,vec[1]+vec[2]);
