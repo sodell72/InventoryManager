@@ -8,7 +8,8 @@
 // provies shared parameters and functions available for all media types.  A media object is created for each new
 // object offered at the chain.  A media object holds information about that particular media product.
 // --------------------------------------------------------------------------------------------------------------------
-#pragma once
+#ifndef MEDIA_H
+#define MEDIA_H
 #include <string>
 #include <sstream>
 #include <vector>
@@ -73,3 +74,4 @@ public:
 	std::string trim(const std::string& input);
 
 };
+#endif

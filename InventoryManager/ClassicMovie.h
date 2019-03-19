@@ -8,7 +8,8 @@
 // Subclass of Media, and Movie which provide shared parameters that are available in all media and movie types 
 // respectively.  ClassicMovie class stores and allows access to information about a classic movie.
 // --------------------------------------------------------------------------------------------------------------------
-#pragma once
+#ifndef CLASSICMOVIE_H
+#define CLASSICMOVIE_H
 #include "Movie.h"
 
 class ClassicMovie : public Movie
@@ -87,3 +88,4 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const ClassicMovie& other) const;
 };
+#endif

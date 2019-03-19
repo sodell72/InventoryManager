@@ -8,7 +8,8 @@
 // Subclass of Media, which provides shared parameters that are available in all media types.  Movie class provides
 // outline for how to store info specific to a movie.
 // --------------------------------------------------------------------------------------------------------------------
-#pragma once
+#ifndef MOVIE_H
+#define MOVIE_H
 #include "Media.h"
 
 class Movie : public Media {
@@ -37,3 +38,4 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	std::string getDirector() const;
 };
+#endif

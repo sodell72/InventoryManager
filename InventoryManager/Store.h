@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STORE_H
+#define STORE_H
 #include "Media.h"
 #include "Movie.h"
 #include "ComedyMovie.h"
@@ -171,3 +172,4 @@ private:
 
 
 };
+#endif

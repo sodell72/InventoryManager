@@ -8,7 +8,8 @@
 // Subclass of Media, and Movie which provide shared parameters that are available in all media and movie types 
 // respectively. DramaMovie class stores and allows access to information about a drama movie.
 // --------------------------------------------------------------------------------------------------------------------
-#pragma once
+#ifndef DRAMAMOVIE_H
+#define DRAMAMOVIE_H
 #include "Movie.h"
 
 class DramaMovie : public Movie
@@ -41,3 +42,4 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const DramaMovie& other) const;
 };
+#endif

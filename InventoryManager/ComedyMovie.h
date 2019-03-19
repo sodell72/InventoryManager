@@ -8,7 +8,8 @@
 // Subclass of Media, and Movie which provide shared parameters that are available in all media and movie types 
 // respectively.  CommedyMovie class stores and allows access to information about a commedy movie.
 // --------------------------------------------------------------------------------------------------------------------
-#pragma once
+#ifndef COMEDYMOVIE_H
+#define COMEDYMOVIE_H
 #include "Movie.h"
 
 class ComedyMovie : public Movie
@@ -44,3 +45,4 @@ public:
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const ComedyMovie& other) const;
 };
+#endif
