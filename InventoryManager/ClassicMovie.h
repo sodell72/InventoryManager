@@ -26,6 +26,8 @@ private:
 	std::string releaseMonth; // stores the release month of the classic movie
 	std::string releaseYear; // stores the release year of the classic movie
 
+	std::vector<std::string> majorActors;
+
 public:
 	// ------------------------------------ClassicMovie-----------------------------------------------
 	// Description: constructor, initializes values based on movie info
@@ -87,5 +89,24 @@ public:
 	// Description: performs less than comparison
 	// ---------------------------------------------------------------------------------------------------
 	virtual bool operator<(const ClassicMovie& other) const;
+
+	// ------------------------------------containsMajorActor-----------------------------------------------
+	// Description: determines if ClassicMovie object already recognizes given actor as major actor
+	// ---------------------------------------------------------------------------------------------------
+	bool containsMajorActor(std::string actor);
+
+	// ------------------------------------getMajorActors-----------------------------------------------
+	// Description: returns all major actors for this classic movie
+	// ---------------------------------------------------------------------------------------------------
+	std::vector<std::string> getMajorActors();
+
+	// ------------------------------------addMajorActor-----------------------------------------------
+	// Description: adds major actor to list of recognized major actors
+	// ---------------------------------------------------------------------------------------------------
+	void addMajorActor(std::string actor);
 };
 #endif
+
+//give major actor, check if it's contained
+//get major actor, returns vector os strings
+// add major actor string

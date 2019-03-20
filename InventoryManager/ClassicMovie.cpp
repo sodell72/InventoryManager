@@ -49,10 +49,14 @@ ClassicMovie::~ClassicMovie()
 }
 
 // ------------------------------------setMajorActorName-----------------------------------------------
-// Description: setter for majorActorName
+// Description: setter for majorActorName, updates major actor name to most recently seen
 // ---------------------------------------------------------------------------------------------------
 void ClassicMovie::setMajorActorName(std::string majorActorName)
 {
+	if (!this->containsMajorActor(majorActorName))
+	{
+		this->addMajorActor(majorActorName);
+	}
 	this->majorActorName = majorActorName;
 }
 
@@ -148,6 +152,34 @@ bool ClassicMovie::operator<(const ClassicMovie & other) const
 	return std::stoi(this->getReleaseYear()) < std::stoi(other.getReleaseYear());
 }
 
+// ------------------------------------containsMajorActor-----------------------------------------------
+// Description: determines if ClassicMovie object already recognizes given actor as major actor
+// ---------------------------------------------------------------------------------------------------
+bool ClassicMovie::containsMajorActor(std::string actor)
+{
+	for (std::string act : this->majorActors)
+	{
+		if (act == actor) return true;
+	}
+	return false;
+}
+
+// ------------------------------------getMajorActors-----------------------------------------------
+// Description: returns all major actors for this classic movie
+// ---------------------------------------------------------------------------------------------------
+std::vector<std::string> ClassicMovie::getMajorActors()
+{
+	return this->getMajorActors;
+}
+
+// ------------------------------------addMajorActor-----------------------------------------------
+// Description: adds major actor to list of recognized major actors
+// ---------------------------------------------------------------------------------------------------
+void ClassicMovie::addMajorActor(std::string actor)
+{
+	this->majorActors.push_back(actor);
+}
+
 // ------------------------------------<<-----------------------------------------------
 // Description: performs << overload to print to console
 // ---------------------------------------------------------------------------------------------------
@@ -161,4 +193,3 @@ std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
 	out << classicMovie.getMajorActorName();
 	return out;
 }
-
