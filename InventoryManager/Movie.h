@@ -39,3 +39,4 @@ public:
 	std::string getDirector() const;
 };
 #endif
+

@@ -161,3 +161,4 @@ std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
 	out << classicMovie.getMajorActorName();
 	return out;
 }
+
