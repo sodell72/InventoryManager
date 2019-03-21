@@ -73,6 +73,7 @@ private:
 	ComedyMovie* comedyhash[ARRAYMAX]; // contains hashed list of comedyMovies
 	DramaMovie* dramahash[ARRAYMAX];  // contains hashed list of dramaMovies
 	ClassicMovie* classichash[ARRAYMAX];  // contains hashed list of classicMovies
+	ClassicMovie* classicmoviemajoractorreleasedatehash[ARRAYMAX]; //contains hashed list of classicMoviebymajoractor
 
 	//Struct which will hold a movie node added to the store. It is part of the three trees that
 	//will hold the movies in sorted order
@@ -89,6 +90,7 @@ private:
 	movienode* comedymoviehead;
 	movienode* dramamoviehead;
 	movienode* classicmoviehead;
+
 
 
 	// ------------------------------------addtotree------------------------------------------------
@@ -125,6 +127,12 @@ private:
 	//-------------------------------------------------------------------------------------------------
 	Movie* moviefoundinhashtable(char moviecode, string moviedetails);
 
+	//-------------------------------------------------------------------------------------------------
+	// Description: Helper function used to check if a given movie is available in the hash table/store
+	// this is being used during borrowing movie and returning classic movie
+	//-------------------------------------------------------------------------------------------------
+	Movie* moviefoundinclassicactorhash(char moviecode, string moviedetails);
+
 	// ------------------------------------insertcomedyhashtable-------------------------------------------
 	// Description: inserts a comedy movie pointers into the comedy hash list. The method uses linear
 	// probing in case of collisions
@@ -136,6 +144,12 @@ private:
 	// probing in case of collisions
 	//------------------------------------------------------------------------------------------------------
 	void insertclassichashtable(string moviedetails, ClassicMovie* classicmovie);
+
+	// ------------------------------------insertclassicactorreleasedatehash-------------------------------------------
+	// Description: inserts a classic movie pointers into the major actor relaese date hash list. The method uses linear
+	// probing in case of collisions
+	//------------------------------------------------------------------------------------------------------
+	void insertclassicactorreleasedatehash(string moviedetails, ClassicMovie* classicmovie);
 
 	// ------------------------------------insertdramahashtable-------------------------------------------
 	// Description: inserts a drama movie pointers into the drama hash list. The method uses linear
@@ -149,6 +163,11 @@ private:
 	// ------------------------------------------------------------------------------------------
 	vector<string> parsemoviedetails(string moviedetails);
 
+	// ------------------------------------parseclassicmovie-------------------------------------
+	// Description: helper function to parse classic movie details from an input string
+	// it is used while adding major actor to movies
+	// ------------------------------------------------------------------------------------------
+	vector<string> parseclassicmovie(string moviedetails);
 	// ------------------------------------parsecommanddetails-------------------------------------
 	// Description: helper function to parse command details from an input string
 	// it is used while processing the command file

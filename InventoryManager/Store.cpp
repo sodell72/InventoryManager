@@ -23,10 +23,9 @@ Store::Store()
 // ---------------------------------------------------------------------------------------------------
 Store::~Store()
 {
-	//std::cout << "DESTRUCTOR CALLED" << endl;
-
-	// deletes nodes in all trees associated with the array of  heads
-	movienode* heads[3] = { this->comedymoviehead, this->dramamoviehead, this->classicmoviehead };
+	std::cout << "DESTRUCTOR CALLED" << endl;
+	movienode* heads[3]  = {this->comedymoviehead, this->dramamoviehead, this->classicmoviehead};
+	// deletes node and associated movie
 	for (movienode* headPtr : heads)
 	{
 		deleteSubTree(headPtr);
@@ -34,24 +33,6 @@ Store::~Store()
 	this->comedymoviehead = nullptr;
 	this->dramamoviehead = nullptr;
 	this->classicmoviehead = nullptr;
-
-	// deletes ComedyMovies
-	for (ComedyMovie* movie : this->comedyhash)
-	{
-		delete movie;
-	}
-
-	// deletes DramaMovies
-	for (DramaMovie* movie : this->dramahash)
-	{
-		delete movie;
-	}
-
-	// deletes ClassicMovies
-	for (ClassicMovie* movie : this->classichash)
-	{
-		delete movie;
-	}
 
 	// deletes transactions and customers
 	for (pair<int, Customer*> pair : this->storecustomers)
@@ -68,7 +49,9 @@ Store::~Store()
 
 		// deletes customers
 		delete pair.second;
+
 	}
+	// do I need to do anything with hash arrays?
 }
 
 // ------------------------------------deleteSubTree-----------------------------------------------
@@ -91,7 +74,7 @@ void Store::deleteSubTree(movienode * subTreeTop)
 			deletionQueue.push(currentNode->right);
 		}
 		deletionQueue.pop();
-		//delete currentNode->moviedetails;
+		delete currentNode->moviedetails;
 		delete currentNode;
 		if (!deletionQueue.empty())
 		{
@@ -165,8 +148,27 @@ void Store::addstoremovies(ifstream& movieinfile)
 
 			if (movieininventory != NULL)
 			{
-				//cout <<"inside update inventory"<<endl;
+				//update the inventory count of the movie added
 				updateinventorycounts(moviecode[0],movieininventory,value);
+
+				//if classic movie update the Classic Majoractor Hash if it is a new actor for the same movie
+				if (moviecode[0] == 'C')
+				{
+
+					vector<string> vec = parsemoviedetails(moviedetails);
+					vector<string> vec2 = parseclassicmovie(vec[2]);
+					string majorActor = "";
+					majorActor = majorActor + vec2[0] + " " + vec2[1];
+
+					if (static_cast<ClassicMovie*>(movieininventory)->containsMajorActor(majorActor))
+						continue;
+					else
+					{
+						static_cast<ClassicMovie*>(movieininventory)->addMajorActor(majorActor);
+						insertclassicactorreleasedatehash(moviedetails,static_cast<ClassicMovie*>(movieininventory));
+					}
+
+				}
 				continue;
 			}
 			movienode* mn = new movienode();
@@ -206,6 +208,7 @@ void Store::addstoremovies(ifstream& movieinfile)
 					ClassicMovie* classicmovie = new ClassicMovie(moviedetails);
 					//cout <<"inside after insert classic movie"<<endl;
 					insertclassichashtable(moviedetails, classicmovie);
+					insertclassicactorreleasedatehash(moviedetails,classicmovie);
 					Movie* movie = classicmovie;
 					mn->inventorycount = value;
 					mn->moviedetails = movie;
@@ -301,6 +304,43 @@ void Store::insertdramahashtable(string moviedetails, DramaMovie* dramamovie)
 
 
 void Store::insertclassichashtable(string moviedetails, ClassicMovie* classicmovie)
+{
+	vector<string> vec = parsemoviedetails(moviedetails);
+
+	//cout<<"hashkeyparameter: "<<vec[2]<<endl;
+	//int hashkey = hashfunction(vec[2]);
+	int hashkey = hashfunction(vec[0]+vec[1]);
+
+	//cout<<"hashkey :"<<hashkey<<endl;
+
+	if (this->classichash[hashkey] == NULL)
+	{
+		this->classichash[hashkey] = classicmovie;
+		return;
+	}
+
+	ClassicMovie* cur = this->classichash[hashkey];
+	int hashcounter = 1; //counter for linear probing
+
+	while(cur != NULL)
+	{
+		cur = this->classichash[hashkey+hashcounter];
+		hashcounter++;
+	}
+
+	this->classichash[hashkey+hashcounter-1] = classicmovie;
+
+	return;
+}
+
+
+// ------------------------------------insertclassicactorreleasedatehash-------------------------------------------
+// Description: inserts a classic movie pointers into the classic hash list of major actor and release date.
+// The method uses linear probing in case of collisions
+//------------------------------------------------------------------------------------------------------
+
+
+void Store::insertclassicactorreleasedatehash(string moviedetails, ClassicMovie* classicmovie)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
 
@@ -667,8 +707,12 @@ bool Store::performBorrowCommand(std::string command)
 	else if (moviecode == "D")
 		moviedetails = vec[4]+vec[5];
 
-
-	movieborrow = moviefoundinhashtable(moviecode[0],moviedetails);
+	//Check if the movie is valid by checking a hash table. For classic movie it will check the classic hash by
+	//major actor and release date
+	if (moviecode == "C")
+		movieborrow = moviefoundinclassicactorhash(moviecode[0],moviedetails);
+	else
+		movieborrow = moviefoundinhashtable(moviecode[0],moviedetails);
 
 	if (movieborrow == NULL)
 	{
@@ -776,6 +820,11 @@ bool Store::performReturnCommand(std::string command)
 
 	moviereturn = moviefoundinhashtable(moviecode[0],moviedetails);
 
+	if (moviecode == "C")
+		moviereturn = moviefoundinclassicactorhash(moviecode[0],moviedetails);
+	else
+		moviereturn = moviefoundinhashtable(moviecode[0],moviedetails);
+
 	if (moviereturn == NULL)
 	{
 		cout<<"You cannot return "<<moviedetails<<" as it was never part of the store"<<endl;
@@ -873,7 +922,7 @@ bool Store::performHistoryCommand(std::string command)
 Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 {
 	vector<string> vec = parsemoviedetails(moviedetails);
-	
+
 	//Depending on the type of movie, checks in the corresponding hash table and if the movie
 	//is present on the unique attributes which are Title and year for comedy movie
 	//Release date and major actor for classic movies and Director and title for Drama Movies
@@ -881,7 +930,10 @@ Movie* Store::moviefoundininventory(char moviecode, string moviedetails)
 	if (moviecode == 'F')
 		return moviefoundinhashtable(moviecode,vec[1]+vec[2]);
 	else if (moviecode == 'C')
-		return moviefoundinhashtable(moviecode,vec[2]);
+		{
+		return moviefoundinhashtable(moviecode,vec[0]+vec[1]);
+		//return moviefoundinhashtable(moviecode,vec[2]);
+		}
 	else if (moviecode == 'D')
 		return moviefoundinhashtable(moviecode,vec[0]+vec[1]);
 	return NULL;
@@ -906,6 +958,34 @@ vector<string> Store::parsemoviedetails(string moviedetails)
 		}
 
 		if (vec.size() != 3)
+		{
+			throw std::invalid_argument("Movie data doesn't have the required attributes") ;
+		}
+
+		return vec;
+}
+
+
+// ------------------------------------parseclassicmovie-------------------------------------
+// Description: helper function to parse classic movie details from an input string
+// it is used while major actor to classic movie
+// ------------------------------------------------------------------------------------------
+
+
+vector<string> Store::parseclassicmovie(string moviedetails)
+{
+
+		stringstream ss(moviedetails);
+		vector<string> vec;
+		string token;
+		while (std::getline(ss, token, ' '))
+		{
+			token = trim(token);
+			vec.push_back(token);
+			//cout <<token<<endl;
+		}
+
+		if (vec.size() != 4)
 		{
 			throw std::invalid_argument("Movie data doesn't have the required attributes") ;
 		}
@@ -986,7 +1066,8 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 			{
 				//cout<<"Hash Comparisons : "<<trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate());
 				//cout<<"   "<<moviedetails<<endl;
-				if (trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate()) == moviedetails)
+				//if (trim(cur->getMajorActorName())+" "+trim(cur->getReleaseDate()) == moviedetails)
+				if (trim(cur->getDirector())+trim(cur->getTitle()) == moviedetails)
 					return cur;
 
 				cur = this->classichash[hashkey+hashcounter];
@@ -1015,6 +1096,46 @@ Movie* Store::moviefoundinhashtable(char moviecode, string moviedetails)
 		}
 
 		return NULL;
+	}
+
+	return NULL;
+
+}
+
+//-------------------------------------------------------------------------------------------------
+// Description: Helper function used to check if a given movie is available in the hash table/store
+// this is being used during borrowing movie and returning classic movie
+//-------------------------------------------------------------------------------------------------
+
+Movie* Store::moviefoundinclassicactorhash(char moviecode, string moviedetails)
+{
+	int hashkey = 0;
+
+	hashkey = hashfunction(moviedetails);
+
+	//cout<<"Hashkey :"<<hashkey<<" Movie Details: "<<moviedetails<<endl;
+
+	if (this->classichash[hashkey] == NULL)
+		return NULL;
+
+	ClassicMovie* cur = this->classichash[hashkey];
+	int hashcounter = 1; //counter for linear probing
+
+	while(cur != NULL)
+	{
+
+		vector<string> majoractornames = cur->getMajorActors();
+		for (int i = 0; i < (int)majoractornames.size(); i++)
+		{
+			//cout<<"Hash Comparisons : "<<endl;
+			//cout<<trim(majoractornames[i])+" "+trim(cur->getReleaseDate())<<endl;
+			//cout<<moviedetails<<endl;
+			if (trim(majoractornames[i])+" "+trim(cur->getReleaseDate()) == moviedetails)
+				return cur;
+		}
+
+		cur = this->classichash[hashkey+hashcounter];
+		hashcounter++;
 	}
 
 	return NULL;

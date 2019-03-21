@@ -169,7 +169,7 @@ bool ClassicMovie::containsMajorActor(std::string actor)
 // ---------------------------------------------------------------------------------------------------
 std::vector<std::string> ClassicMovie::getMajorActors()
 {
-	return this->getMajorActors;
+	return this->majorActors;
 }
 
 // ------------------------------------addMajorActor-----------------------------------------------
@@ -186,10 +186,10 @@ void ClassicMovie::addMajorActor(std::string actor)
 std::ostream & operator<<(std::ostream & out, const ClassicMovie & classicMovie)
 {
 	out << "Classic" << " ";
-	//out << "TITLE: " << classicMovie.getTitle() << " ";
+	out << classicMovie.getDirector() << " ";
+	out <<  classicMovie.getTitle() << " ";
 	out << classicMovie.getReleaseDate() << " ";
 	//out << "DISTRIBUTION TYPE: " << classicMovie.getDistributionType() << " ";
-	//out << "DIRECTOR: " << classicMovie.getDirector() << " ";
-	out << classicMovie.getMajorActorName();
+	//out << classicMovie.getMajorActorName();
 	return out;
 }
