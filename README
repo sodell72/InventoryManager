@@ -1,0 +1,27 @@
+Final Project for CSS 502.
+Authors: Sean O'Dell, Vishnu Mohan
+
+Movie store inventory management tracking system for ficticious business.  
+
+Tracks different types of movies/videos.
+Allows for Borrow/Return/Inventory/History actions
+
+Initializes inventory from txt file.
+Initializes customers from a second txt file.
+Processes arbitrary sequence of commands from a third txt file.
+
+Formatting in initialization txt file.
+-	For comedy movies: F, Stock, Director, Title, Year it released 
+-	For drama movies: D, Stock, Director, Title, Year it released
+-	For classics movies: C, Stock, Director, Title, Major actor Release date
+
+Stystem storage information formatting
+-	comedy movies (‘F’) sorted by Title, then Year it released 
+-	dramas (‘D’) are sorted by Director, then Title 
+-	classics (‘C’) are sorted by Release date, then Major actor
+
+Formatting in customer txt file. (space delimited)
+- ID#, Last Name, First Name
+
+Formatting in commands txt file. (space delimited)
+Action, ID#, Media Type, Movie Type (sub type), movie data
